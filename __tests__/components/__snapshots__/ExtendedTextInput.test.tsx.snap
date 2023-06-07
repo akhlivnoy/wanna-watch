@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI: ExtendedTextInput should match snapshot 1`] = `
+<View>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#333",
+          "fontSize": 15,
+        },
+        Array [
+          Object {},
+          Object {
+            "color": "red",
+            "marginBottom": 10,
+          },
+        ],
+      ]
+    }
+  >
+    test input
+  </Text>
+  <TextInput
+    onChangeText={[Function]}
+    style={
+      Array [
+        Object {
+          "borderBottomWidth": 1,
+        },
+        Object {
+          "backgroundColor": "yellow",
+        },
+      ]
+    }
+    value="test input"
+  />
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#333",
+          "fontSize": 15,
+        },
+        Array [
+          Object {},
+          Object {
+            "color": "red",
+            "marginTop": 10,
+          },
+        ],
+      ]
+    }
+  >
+    smth broken
+  </Text>
+</View>
+`;
+
+exports[`UI: ExtendedTextInput should match snapshot 2`] = `
+<View>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#333",
+          "fontSize": 15,
+        },
+        Array [
+          Object {},
+          Object {
+            "color": "red",
+            "marginBottom": 10,
+          },
+        ],
+      ]
+    }
+  >
+    password toggle test input
+  </Text>
+  <View
+    style={
+      Object {
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      secureTextEntry={true}
+      style={
+        Array [
+          Array [
+            Object {
+              "borderBottomWidth": 1,
+            },
+            Object {
+              "backgroundColor": "yellow",
+            },
+          ],
+          Object {
+            "borderBottomWidth": 0,
+            "flex": 1,
+          },
+        ]
+      }
+      value="test input"
+    />
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "red",
+            "height": 15,
+            "width": 15,
+          }
+        }
+      />
+    </View>
+  </View>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#333",
+          "fontSize": 15,
+        },
+        Array [
+          Object {},
+          Object {
+            "color": "red",
+            "marginTop": 10,
+          },
+        ],
+      ]
+    }
+  >
+    smth broken
+  </Text>
+</View>
+`;

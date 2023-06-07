@@ -1,0 +1,1 @@
+export { ExtendedButton } from './ExtendedButton';

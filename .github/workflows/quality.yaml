@@ -1,0 +1,26 @@
+name: Code quality check
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+      - release
+
+jobs:
+  quality:
+    name: Quality check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install modules
+        run: yarn install
+
+      - name: Run ESLint
+        run: yarn run lint
+
+      - name: Run Unit Tests
+        run: yarn test

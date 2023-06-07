@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI: ExtendedText should match snapshot 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#333",
+        "fontSize": 15,
+      },
+      undefined,
+    ]
+  }
+>
+  test text
+</Text>
+`;
+
+exports[`UI: ExtendedText should match snapshot 2`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#333",
+        "fontSize": 24,
+        "fontWeight": "bold",
+      },
+      undefined,
+    ]
+  }
+>
+  test title text
+</Text>
+`;
+
+exports[`UI: ExtendedText should match snapshot 3`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#333",
+        "fontSize": 11,
+      },
+      undefined,
+    ]
+  }
+>
+  test secondary text
+</Text>
+`;

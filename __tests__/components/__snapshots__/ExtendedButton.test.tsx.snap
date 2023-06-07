@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI: ExtendedButton should match snapshot 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#333",
+      "opacity": 1,
+      "padding": 16,
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#333",
+          "fontSize": 15,
+        },
+        Array [
+          Object {
+            "color": "white",
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    hello, test
+  </Text>
+</View>
+`;
