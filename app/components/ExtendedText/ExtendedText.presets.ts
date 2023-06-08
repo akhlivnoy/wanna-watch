@@ -21,7 +21,7 @@ interface IExtendedTextStyles {
 export type ExtendedTextPresets = keyof IExtendedTextStyles;
 
 export default StyleSheet.create<IExtendedTextStyles>({
-  regular32: TEXTS.REGULAR12,
+  regular32: TEXTS.REGULAR32,
   regular16: TEXTS.REGULAR16,
   regular14: TEXTS.REGULAR14,
   regular12: TEXTS.REGULAR12,
