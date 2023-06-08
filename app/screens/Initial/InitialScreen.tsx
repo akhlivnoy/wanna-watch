@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 
-import { ExtendedText } from '#components';
-import { RootStackRouteNames } from '#navigation/RootStackNavigator';
+import { SVG } from '#assets/svg';
+import { RootStackRouteNames } from '#navigation';
 import { StaticNavigator } from '#services/navigator';
 
 import { styles } from './InitialScreen.styles';
@@ -16,7 +16,12 @@ export const InitialScreen = ({ navigation }: InitialScreenProps) => {
 
   return (
     <SafeAreaView style={styles.root}>
-      <ExtendedText preset="title">Loading simulation...</ExtendedText>
+      <View>
+        <SVG.LogoWithDescription
+          height={233}
+          width={280}
+        />
+      </View>
     </SafeAreaView>
   );
 };
