@@ -23,10 +23,7 @@ exports[`UI: ExtendedButton should match snapshot 1`] = `
   <Text
     style={
       Array [
-        Object {
-          "color": "#333",
-          "fontSize": 15,
-        },
+        undefined,
         Array [
           Object {
             "color": "white",
