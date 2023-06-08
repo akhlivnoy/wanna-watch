@@ -14,7 +14,7 @@ exports[`UI: ExtendedButton should match snapshot 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "backgroundColor": "#333",
+      "backgroundColor": undefined,
       "opacity": 1,
       "padding": 16,
     }
@@ -23,10 +23,13 @@ exports[`UI: ExtendedButton should match snapshot 1`] = `
   <Text
     style={
       Array [
+        Object {
+          "color": "#000000",
+        },
         undefined,
         Array [
           Object {
-            "color": "white",
+            "color": undefined,
           },
           undefined,
         ],

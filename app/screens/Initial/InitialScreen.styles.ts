@@ -9,7 +9,7 @@ type InitialScreenStyles = {
 export const styles = StyleSheet.create<InitialScreenStyles>({
   root: {
     flex: 1,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: COLORS.PRIMARY[500],
     alignItems: 'center',
     justifyContent: 'center',
   },

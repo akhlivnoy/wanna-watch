@@ -5,6 +5,9 @@ exports[`UI: ExtendedText should match snapshot 1`] = `
   style={
     Array [
       Object {
+        "color": "#000000",
+      },
+      Object {
         "fontFamily": "SourceSans3-Regular",
         "fontSize": 16,
         "lineHeight": 24,
@@ -21,6 +24,9 @@ exports[`UI: ExtendedText should match snapshot 2`] = `
 <Text
   style={
     Array [
+      Object {
+        "color": "#000000",
+      },
       undefined,
       undefined,
     ]
@@ -34,6 +40,9 @@ exports[`UI: ExtendedText should match snapshot 3`] = `
 <Text
   style={
     Array [
+      Object {
+        "color": "#000000",
+      },
       undefined,
       undefined,
     ]
