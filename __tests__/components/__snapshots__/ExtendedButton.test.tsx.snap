@@ -24,7 +24,7 @@ exports[`UI: ExtendedButton should match snapshot 1`] = `
     style={
       Array [
         Object {
-          "color": "#000000",
+          "color": "#ECECEC",
         },
         undefined,
         Array [

@@ -1,6 +1,6 @@
 export enum RootStackRouteNames {
   Initial = 'Initial',
-  HomeStack = 'HomeStack',
+  MainTab = 'MainTab',
 }
 
 export type RootStackParamList = Record<RootStackRouteNames, undefined>;
