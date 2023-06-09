@@ -11,7 +11,7 @@ import { InitialScreenProps } from './InitialScreen.types';
 export const InitialScreen = ({ navigation }: InitialScreenProps) => {
   useEffect(() => {
     // TODO: Timeout for loading simulation. Replace it with data fetching
-    setTimeout(() => StaticNavigator.navigateTo(RootStackRouteNames.HomeStack), 500);
+    setTimeout(() => StaticNavigator.navigateTo(RootStackRouteNames.MainTab), 500);
   }, [navigation]);
 
   return (

@@ -4,7 +4,7 @@ import { COLORS } from '../themes/colors';
 
 type GeneralStyles = {
   flex: ViewStyle;
-  whFlex: ViewStyle;
+  blackFlex: ViewStyle;
 
   jcCenter: ViewStyle;
   jcEnd: ViewStyle;
@@ -22,9 +22,9 @@ export const generalStyles = StyleSheet.create<GeneralStyles>({
   flex: {
     flex: 1,
   },
-  whFlex: {
+  blackFlex: {
     flex: 1,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: COLORS.PRIMARY[600],
   },
 
   jcCenter: {

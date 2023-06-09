@@ -7,7 +7,7 @@ import presets from './ExtendedText.presets';
 import { IExtendedTextProps } from './ExtendedText.types';
 
 const defaultColor: TextStyle = {
-  color: COLORS.PRIMARY[600],
+  color: COLORS.PRIMARY[100],
 };
 
 export const ExtendedText: React.ComponentType<IExtendedTextProps> = ({ style, preset = 'regular16', ...rest }) => {

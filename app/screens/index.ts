@@ -1,3 +1,4 @@
-export * from './Home';
 export * from './Initial';
-export * from './Reanimated';
+export * from './Movies';
+export * from './Search';
+export * from './Series';
