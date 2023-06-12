@@ -1,10 +1,10 @@
 import { StyleSheet, ViewStyle } from 'react-native';
 
-interface ISearchScreenStyles {
+interface ISeriesListsScreenStyles {
   container: ViewStyle;
 }
 
-export const styles = StyleSheet.create<ISearchScreenStyles>({
+export const styles = StyleSheet.create<ISeriesListsScreenStyles>({
   container: {
     flex: 1,
     justifyContent: 'center',
