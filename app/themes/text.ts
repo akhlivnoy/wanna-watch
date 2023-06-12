@@ -15,6 +15,7 @@ enum Texts {
 
   SEMIBOLD32 = 'SEMIBOLD32',
   SEMIBOLD24 = 'SEMIBOLD24',
+  SEMIBOLD16 = 'SEMIBOLD16',
   SEMIBOLD8 = 'SEMIBOLD8',
 }
 
@@ -70,6 +71,11 @@ export const TEXTS: Record<Texts, TextStyle> = {
     fontFamily: FONTS.SOURCE_SANS3_SEMI_BOLD,
     fontSize: 24,
     lineHeight: 32,
+  },
+  SEMIBOLD16: {
+    fontFamily: FONTS.SOURCE_SANS3_SEMI_BOLD,
+    fontSize: 16,
+    lineHeight: 24,
   },
   SEMIBOLD8: {
     fontFamily: FONTS.SOURCE_SANS3_SEMI_BOLD,
