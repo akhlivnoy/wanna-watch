@@ -4,13 +4,13 @@ import { SafeAreaView, View } from 'react-native';
 import { ExtendedText } from '#components';
 import { generalStyles } from '#utils/styles';
 
-import { styles } from './SeriesScreen.styles';
-import { SeriesScreenProps } from './SeriesScreen.types';
+import { styles } from './MovieListsScreen.styles';
+import { MovieListsScreenProps } from './MovieListsScreen.types';
 
-export const SeriesScreen: React.ComponentType<SeriesScreenProps> = () => (
+export const MovieListsScreen: React.ComponentType<MovieListsScreenProps> = () => (
   <SafeAreaView style={generalStyles.blackFlex}>
     <View style={styles.container}>
-      <ExtendedText>Series Screen</ExtendedText>
+      <ExtendedText>MovieLists Screen</ExtendedText>
     </View>
   </SafeAreaView>
 );

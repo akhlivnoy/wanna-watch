@@ -1,4 +1,4 @@
 export * from './Initial';
-export * from './Movies';
+export * from './MovieLists';
 export * from './Search';
-export * from './Series';
+export * from './SeriesLists';
