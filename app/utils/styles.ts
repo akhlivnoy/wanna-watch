@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
 import { COLORS } from '../themes/colors';
 
@@ -16,6 +16,9 @@ type GeneralStyles = {
   centered: ViewStyle;
 
   row: ViewStyle;
+
+  darkPrimaryColor: TextStyle;
+  accentColor: TextStyle;
 };
 
 export const generalStyles = StyleSheet.create<GeneralStyles>({
@@ -51,5 +54,12 @@ export const generalStyles = StyleSheet.create<GeneralStyles>({
 
   row: {
     flexDirection: 'row',
+  },
+
+  darkPrimaryColor: {
+    color: COLORS.PRIMARY[600],
+  },
+  accentColor: {
+    color: COLORS.ACCENT[300],
   },
 });
