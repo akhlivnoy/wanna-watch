@@ -1,4 +1,5 @@
 import React from 'react';
+import { ViewStyle } from 'react-native';
 import { Route, SceneRendererProps } from 'react-native-tab-view';
 
 export interface ITopTabsProps {
@@ -8,4 +9,6 @@ export interface ITopTabsProps {
       route: Route;
     },
   ) => React.ReactNode;
+  style?: ViewStyle;
+  tabBarStyle?: ViewStyle;
 }

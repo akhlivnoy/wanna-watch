@@ -6,7 +6,7 @@ import { COLORS } from '#themes/colors';
 import { styles } from './TopTabs.styles';
 import { ITopTabsProps } from './TopTabs.types';
 
-export const TopTabs: React.ComponentType<ITopTabsProps> = ({ routes, renderScene }) => {
+export const TopTabs: React.ComponentType<ITopTabsProps> = ({ routes, renderScene, style, tabBarStyle }) => {
   const [index, setIndex] = useState(0);
 
   const renderTabBar = useCallback(
@@ -19,11 +19,12 @@ export const TopTabs: React.ComponentType<ITopTabsProps> = ({ routes, renderScen
         indicatorContainerStyle={styles.indicatorContainerStyle}
         indicatorStyle={styles.indicatorStyle}
         labelStyle={styles.labelStyle}
+        style={tabBarStyle}
         tabStyle={styles.tabStyle}
         {...props}
       />
     ),
-    [],
+    [tabBarStyle],
   );
 
   return (
@@ -31,6 +32,7 @@ export const TopTabs: React.ComponentType<ITopTabsProps> = ({ routes, renderScen
       navigationState={{ index, routes }}
       renderScene={renderScene}
       renderTabBar={renderTabBar}
+      style={style}
       onIndexChange={setIndex}
     />
   );
