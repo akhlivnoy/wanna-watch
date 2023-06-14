@@ -1,1 +1,0 @@
-export { SearchTab } from './SearchTab';

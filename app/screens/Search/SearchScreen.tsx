@@ -7,42 +7,46 @@ import { useAppDispatch, useAppSelector, useMount } from '#hooks';
 import { tmdbSlice } from '#redux/slices';
 import { generalStyles } from '#utils/styles';
 
-import { SearchTab } from './components';
+import { SearchMoviesTab, SearchSeriesTab } from './components';
 import { ROUTES, SearchTabType } from './SearchScreen.data';
 import { styles } from './SearchScreen.styles';
 import { SearchScreenProps } from './SearchScreen.types';
 
 export const SearchScreen: React.ComponentType<SearchScreenProps> = () => {
   const {
-    topRatedMovies: { movies, nextPage },
+    topRatedMovies: { movies, nextPage: moviesNextPage },
+    topRatedSeries: { series, nextPage: seriesNextPage },
   } = useAppSelector(state => state.tmdb);
 
   const dispatch = useAppDispatch();
 
   useMount(() => {
-    dispatch(tmdbSlice.actions.getTopRatedMovies({ page: nextPage }));
+    dispatch(tmdbSlice.actions.getTopRatedMovies({ page: moviesNextPage }));
+    dispatch(tmdbSlice.actions.getTopRatedSeries({ page: seriesNextPage }));
   });
 
-  const onEndReached = () => {
-    dispatch(tmdbSlice.actions.getTopRatedMovies({ page: nextPage }));
+  const onMoviesEndReached = () => {
+    dispatch(tmdbSlice.actions.getTopRatedMovies({ page: moviesNextPage }));
+  };
+
+  const onSeriesEndReached = () => {
+    dispatch(tmdbSlice.actions.getTopRatedSeries({ page: seriesNextPage }));
   };
 
   const renderScene = ({ route }: SceneRendererProps & { route: Route }): React.ReactNode => {
     switch (route.key) {
       case SearchTabType.Movies:
         return (
-          <SearchTab
+          <SearchMoviesTab
             data={movies}
-            type={SearchTabType.Movies}
-            onEndReached={onEndReached}
+            onEndReached={onMoviesEndReached}
           />
         );
       case SearchTabType.Series:
         return (
-          <SearchTab
-            data={movies}
-            type={SearchTabType.Movies}
-            onEndReached={onEndReached}
+          <SearchSeriesTab
+            data={series}
+            onEndReached={onSeriesEndReached}
           />
         );
       default:

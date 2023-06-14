@@ -1,11 +1,11 @@
 import { StyleSheet, ViewStyle } from 'react-native';
 
-interface IMoviesSearchStyles {
+interface ISearchSeriesTabStyles {
   container: ViewStyle;
   card: ViewStyle;
 }
 
-export const styles = StyleSheet.create<IMoviesSearchStyles>({
+export const styles = StyleSheet.create<ISearchSeriesTabStyles>({
   container: {
     marginRight: 16,
   },

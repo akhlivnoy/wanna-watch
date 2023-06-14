@@ -5,7 +5,12 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { RootStackRouteNames } from '#navigation';
 import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
-import { ApiGetGenresResponse, ApiGetTopRatedMoviesBody, ApiGetTopRatedMoviesResponse } from '#services/api/types';
+import {
+  ApiGetGenresResponse,
+  ApiGetTopRatedBody,
+  ApiGetTopRatedMoviesResponse,
+  ApiGetTopRatedSeriesResponse,
+} from '#services/api/types';
 import { StaticNavigator } from '#services/navigator';
 
 function* getGenresWorker() {
@@ -34,8 +39,8 @@ function* getGenresWorker() {
   }
 }
 
-function* getTopRatedMoviesWorker({ payload: { page } }: PayloadAction<ApiGetTopRatedMoviesBody>) {
-  const body: ApiGetTopRatedMoviesBody = {
+function* getTopRatedMoviesWorker({ payload: { page } }: PayloadAction<ApiGetTopRatedBody>) {
+  const body: ApiGetTopRatedBody = {
     page,
   };
   const response: ApiGetTopRatedMoviesResponse = yield call(apiInstance.tmdb.getTopRatedMovies, body);
@@ -48,7 +53,22 @@ function* getTopRatedMoviesWorker({ payload: { page } }: PayloadAction<ApiGetTop
   }
 }
 
+function* getTopRatedSeriesWorker({ payload: { page } }: PayloadAction<ApiGetTopRatedBody>) {
+  const body: ApiGetTopRatedBody = {
+    page,
+  };
+  const response: ApiGetTopRatedSeriesResponse = yield call(apiInstance.tmdb.getTopRatedSeries, body);
+  if (!isUndefined(response.data)) {
+    if (response.ok) {
+      yield put(tmdbSlice.actions.getTopRatedSeriesSuccess(response.data));
+    } else {
+      yield put(tmdbSlice.actions.getTopRatedSeriesError(response.data.status_message));
+    }
+  }
+}
+
 export function* tmdbSaga() {
   yield takeLatest(tmdbSlice.actions.getGenres, getGenresWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedMovies, getTopRatedMoviesWorker);
+  yield takeLatest(tmdbSlice.actions.getTopRatedSeries, getTopRatedSeriesWorker);
 }

@@ -1,1 +1,2 @@
-export * from './SearchTab';
+export * from './SearchMoviesTab';
+export * from './SearchSeriesTab';

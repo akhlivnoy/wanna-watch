@@ -1,0 +1,1 @@
+export { SearchSeriesTab } from './SearchSeriesTab';

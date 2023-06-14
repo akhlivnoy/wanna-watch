@@ -1,0 +1,1 @@
+export { SearchMoviesTab } from './SearchMoviesTab';

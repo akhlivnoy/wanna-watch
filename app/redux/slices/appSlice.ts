@@ -15,10 +15,12 @@ const INITIAL_STATE: IAppState = {
   loading: {
     isGetGenres: false,
     isGetTopRatedMovies: false,
+    isGetTopRatedSeries: false,
   },
   errors: {
     getGenres: null,
     getTopRatedMovies: null,
+    getTopRatedSeries: null,
   },
 };
 
@@ -74,6 +76,17 @@ export const appSlice = createSlice({
       ],
       LoadingType.isGetTopRatedMovies,
       ErrorType.getTopRatedMovies,
+    );
+
+    // Get top rated series
+    addCases(
+      [
+        tmdbSlice.actions.getTopRatedSeries,
+        tmdbSlice.actions.getTopRatedSeriesSuccess,
+        tmdbSlice.actions.getTopRatedSeriesError,
+      ],
+      LoadingType.isGetTopRatedSeries,
+      ErrorType.getTopRatedSeries,
     );
   },
 });
