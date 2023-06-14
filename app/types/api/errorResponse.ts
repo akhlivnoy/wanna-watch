@@ -1,4 +1,5 @@
-// TODO: type your default error response from server here
 export type ErrorResponse = {
-  error: string;
+  success: boolean;
+  status_code: number;
+  status_message: string;
 };

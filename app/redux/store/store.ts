@@ -7,11 +7,11 @@ import createSagaMiddleware from 'redux-saga';
 import { ConfiguredReactotron } from '#services/reactotron';
 
 import { rootSaga } from '../sagas';
-import { appSlice, userSlice } from '../slices';
+import { appSlice, tmdbSlice } from '../slices';
 
 export const rootReducer = combineReducers({
   app: appSlice.reducer,
-  user: userSlice.reducer,
+  tmdb: tmdbSlice.reducer,
 });
 
 const PERSIST_CONFIG: PersistConfig<ReturnType<typeof rootReducer>> = {

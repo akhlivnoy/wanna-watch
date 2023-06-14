@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { Nullable } from '#types/nullable';
 
 import { ErrorType, LoadingType } from '../types';
-import { userSlice } from './userSlice';
+import { tmdbSlice } from './tmdbSlice';
 
 export interface IAppState {
   loading: Record<LoadingType, boolean>;
@@ -13,14 +13,12 @@ export interface IAppState {
 
 const INITIAL_STATE: IAppState = {
   loading: {
-    isGetUser: false,
-    isLoginUser: false,
-    isRegisterUser: false,
+    isGetGenres: false,
+    isGetTopRatedMovies: false,
   },
   errors: {
-    getUser: null,
-    loginUser: null,
-    registerUser: null,
+    getGenres: null,
+    getTopRatedMovies: null,
   },
 };
 
@@ -60,18 +58,22 @@ export const appSlice = createSlice({
       });
     };
 
-    // Login actions
+    // Get genres
     addCases(
-      [userSlice.actions.loginUser, userSlice.actions.loginUserSuccess, userSlice.actions.loginUserError],
-      LoadingType.isLoginUser,
-      ErrorType.loginUser,
+      [tmdbSlice.actions.getGenres, tmdbSlice.actions.getGenresSuccess, tmdbSlice.actions.getGenresError],
+      LoadingType.isGetGenres,
+      ErrorType.getGenres,
     );
 
-    // Register actions
+    // Get top rated movies
     addCases(
-      [userSlice.actions.registerUser, userSlice.actions.registerUserSuccess, userSlice.actions.registerUserError],
-      LoadingType.isRegisterUser,
-      ErrorType.registerUser,
+      [
+        tmdbSlice.actions.getTopRatedMovies,
+        tmdbSlice.actions.getTopRatedMoviesSuccess,
+        tmdbSlice.actions.getTopRatedMoviesError,
+      ],
+      LoadingType.isGetTopRatedMovies,
+      ErrorType.getTopRatedMovies,
     );
   },
 });

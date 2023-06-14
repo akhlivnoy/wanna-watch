@@ -1,18 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
-import { RootStackRouteNames } from '#navigation';
-import { StaticNavigator } from '#services/navigator';
+import { useAppDispatch, useMount } from '#hooks';
+import { tmdbSlice } from '#redux/slices';
 
 import { styles } from './InitialScreen.styles';
 import { InitialScreenProps } from './InitialScreen.types';
 
-export const InitialScreen = ({ navigation }: InitialScreenProps) => {
-  useEffect(() => {
-    // TODO: Timeout for loading simulation. Replace it with data fetching
-    setTimeout(() => StaticNavigator.navigateTo(RootStackRouteNames.MainTab), 500);
-  }, [navigation]);
+export const InitialScreen: React.ComponentType<InitialScreenProps> = () => {
+  const dispatch = useAppDispatch();
+
+  useMount(() => {
+    dispatch(tmdbSlice.actions.getGenres());
+    dispatch(tmdbSlice.actions.clearTopRatedMovies());
+  });
 
   return (
     <SafeAreaView style={styles.root}>
