@@ -1,20 +1,17 @@
 import apisauce, { ApisauceInstance } from 'apisauce';
 
-import { API_BASE_URL, API_DEFAULT_HEADERS, API_TIMEOUT } from '#constants';
+import { TMDB_HEADERS } from '#constants/tmdb';
 
-import { userApi } from './user';
+// eslint-disable-next-line restrict-imports/restrict-imports
+import CONFIG from '../../config/env';
+import { tmdbApi } from './tmdb';
 
 export const apiClient: ApisauceInstance = apisauce.create({
-  baseURL: API_BASE_URL,
-  timeout: API_TIMEOUT,
-  headers: API_DEFAULT_HEADERS,
+  baseURL: CONFIG.API_URL,
+  timeout: CONFIG.API_TIMEOUT,
+  headers: TMDB_HEADERS,
 });
 
-const setAuthHeader = (token: string) => {
-  apiClient.setHeader('Authorization', `Bearer ${token}`);
-};
-
 export const apiInstance = {
-  setAuthHeader,
-  user: userApi,
+  tmdb: tmdbApi,
 };

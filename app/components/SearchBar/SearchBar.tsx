@@ -1,14 +1,15 @@
 import React, { useMemo, useState } from 'react';
-import { TextInput, TextInputProps, View, ViewStyle } from 'react-native';
+import { TextInput, View, ViewStyle } from 'react-native';
 
 import { SVG } from '#assets/svg';
 import { COLORS } from '#themes/colors';
 
 import { styles } from './SearchBar.styles';
+import { ISearchBarProps } from './SearchBar.types';
 
 const SearchIcon = SVG.Search;
 
-export const SearchBar: React.ComponentType<TextInputProps> = ({ style, onChangeText, ...props }) => {
+export const SearchBar: React.ComponentType<ISearchBarProps> = ({ style, containerStyle, onChangeText, ...props }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [currentColor, setCurrentColor] = useState(COLORS.PRIMARY[300]);
@@ -39,8 +40,9 @@ export const SearchBar: React.ComponentType<TextInputProps> = ({ style, onChange
   };
 
   return (
-    <View style={[styles.container, borderStyle]}>
+    <View style={[styles.container, borderStyle, containerStyle]}>
       <TextInput
+        placeholder="Search..."
         placeholderTextColor={COLORS.PRIMARY[300]}
         style={[styles.input, style]}
         onBlur={onBlur}

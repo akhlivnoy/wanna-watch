@@ -1,11 +1,11 @@
 export enum ErrorType {
-  registerUser = 'registerUser',
-  loginUser = 'loginUser',
-  getUser = 'getUser',
+  getGenres = 'getGenres',
+  getTopRatedMovies = 'getTopRatedMovies',
+  getTopRatedSeries = 'getTopRatedSeries',
 }
 
 export enum LoadingType {
-  isLoginUser = 'isLoginUser',
-  isRegisterUser = 'isRegisterUser',
-  isGetUser = 'isGetUser',
+  isGetGenres = 'isGetGenres',
+  isGetTopRatedMovies = 'isGetTopRatedMovies',
+  isGetTopRatedSeries = 'isGetTopRatedSeries',
 }

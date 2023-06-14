@@ -12,10 +12,10 @@ import { ICardProps } from './Card.types';
 
 const StarStrokeIcon = SVG.StarStroke;
 
-export const Card: React.ComponentType<ICardProps> = ({ onPress, posterUri, title, genres, date, rating }) => (
+export const Card: React.ComponentType<ICardProps> = ({ posterUri, title, genres, date, rating, style, ...rest }) => (
   <TouchableOpacity
-    style={styles.container}
-    onPress={onPress}
+    style={[styles.container, style]}
+    {...rest}
   >
     {/* //? Poster */}
     <Image
@@ -24,7 +24,12 @@ export const Card: React.ComponentType<ICardProps> = ({ onPress, posterUri, titl
     />
 
     <View style={styles.info}>
-      <ExtendedText preset="regular16">{title}</ExtendedText>
+      <ExtendedText
+        numberOfLines={1}
+        preset="regular16"
+      >
+        {title}
+      </ExtendedText>
       {/* //? Genres */}
       <View style={generalStyles.row}>
         {_.map(genres, genre => (
