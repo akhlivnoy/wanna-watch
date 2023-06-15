@@ -7,9 +7,10 @@ import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
 import {
   ApiGetGenresResponse,
+  ApiGetMoviesResponse,
+  ApiGetSeriesResponse,
   ApiGetTopRatedBody,
-  ApiGetTopRatedMoviesResponse,
-  ApiGetTopRatedSeriesResponse,
+  ApiSearchBody,
 } from '#services/api/types';
 import { StaticNavigator } from '#services/navigator';
 
@@ -43,7 +44,7 @@ function* getTopRatedMoviesWorker({ payload: { page } }: PayloadAction<ApiGetTop
   const body: ApiGetTopRatedBody = {
     page,
   };
-  const response: ApiGetTopRatedMoviesResponse = yield call(apiInstance.tmdb.getTopRatedMovies, body);
+  const response: ApiGetMoviesResponse = yield call(apiInstance.tmdb.getTopRatedMovies, body);
   if (!isUndefined(response.data)) {
     if (response.ok) {
       yield put(tmdbSlice.actions.getTopRatedMoviesSuccess(response.data));
@@ -57,7 +58,7 @@ function* getTopRatedSeriesWorker({ payload: { page } }: PayloadAction<ApiGetTop
   const body: ApiGetTopRatedBody = {
     page,
   };
-  const response: ApiGetTopRatedSeriesResponse = yield call(apiInstance.tmdb.getTopRatedSeries, body);
+  const response: ApiGetSeriesResponse = yield call(apiInstance.tmdb.getTopRatedSeries, body);
   if (!isUndefined(response.data)) {
     if (response.ok) {
       yield put(tmdbSlice.actions.getTopRatedSeriesSuccess(response.data));
@@ -67,8 +68,25 @@ function* getTopRatedSeriesWorker({ payload: { page } }: PayloadAction<ApiGetTop
   }
 }
 
+function* searchMovieWorker({ payload: { page, query } }: PayloadAction<ApiSearchBody>) {
+  const body: ApiSearchBody = {
+    page,
+    query,
+  };
+  const response: ApiGetMoviesResponse = yield call(apiInstance.tmdb.searchMovie, body);
+
+  if (!isUndefined(response.data)) {
+    if (response.ok) {
+      yield put(tmdbSlice.actions.searchMovieSuccess(response.data));
+    } else {
+      yield put(tmdbSlice.actions.searchMovieError(response.data.status_message));
+    }
+  }
+}
+
 export function* tmdbSaga() {
   yield takeLatest(tmdbSlice.actions.getGenres, getGenresWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedMovies, getTopRatedMoviesWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedSeries, getTopRatedSeriesWorker);
+  yield takeLatest(tmdbSlice.actions.searchMovie, searchMovieWorker);
 }

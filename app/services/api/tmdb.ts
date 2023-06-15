@@ -5,9 +5,10 @@ import CONFIG from '../../config/env';
 import { apiClient } from '.';
 import {
   ApiGetGenresSuccessResponse,
+  ApiGetMoviesSuccessResponse,
+  ApiGetSeriesSuccessResponse,
   ApiGetTopRatedBody,
-  ApiGetTopRatedMoviesSuccessResponse,
-  ApiGetTopRatedSeriesSuccessResponse,
+  ApiSearchBody,
 } from './types';
 
 const getImageUri = (imageKey: string) => CONFIG.SECURE_BASE_URL + imageKey;
@@ -17,10 +18,13 @@ const getMovieGenres = () => apiClient.get<ApiGetGenresSuccessResponse, ErrorRes
 const getSeriesGenres = () => apiClient.get<ApiGetGenresSuccessResponse, ErrorResponse>('genre/tv/list');
 
 const getTopRatedMovies = (body: ApiGetTopRatedBody) =>
-  apiClient.get<ApiGetTopRatedMoviesSuccessResponse, ErrorResponse>('movie/top_rated', body);
+  apiClient.get<ApiGetMoviesSuccessResponse, ErrorResponse>('movie/top_rated', body);
 
 const getTopRatedSeries = (body: ApiGetTopRatedBody) =>
-  apiClient.get<ApiGetTopRatedSeriesSuccessResponse, ErrorResponse>('tv/top_rated', body);
+  apiClient.get<ApiGetSeriesSuccessResponse, ErrorResponse>('tv/top_rated', body);
+
+const searchMovie = (body: ApiSearchBody) =>
+  apiClient.get<ApiGetMoviesSuccessResponse, ErrorResponse>('search/movie', body);
 
 export const tmdbApi = {
   getImageUri,
@@ -28,4 +32,5 @@ export const tmdbApi = {
   getSeriesGenres,
   getTopRatedMovies,
   getTopRatedSeries,
+  searchMovie,
 };

@@ -11,22 +11,33 @@ export type ApiGetGenresSuccessResponse = {
 
 export type ApiGetGenresResponse = ApiResponse<ApiGetGenresSuccessResponse, ErrorResponse>;
 
-// Get top rated movies
+// Get movies
 
 export type ApiGetTopRatedBody = {
   page: number;
 };
 
-export type ApiGetTopRatedMoviesSuccessResponse = {
+export type ApiGetMoviesSuccessResponse = {
+  page: number;
   results: IMovie[];
+  total_pages: number;
 };
 
-export type ApiGetTopRatedMoviesResponse = ApiResponse<ApiGetTopRatedMoviesSuccessResponse, ErrorResponse>;
+export type ApiGetMoviesResponse = ApiResponse<ApiGetMoviesSuccessResponse, ErrorResponse>;
 
-// Get top rated series
+// Get series
 
-export type ApiGetTopRatedSeriesSuccessResponse = {
+export type ApiGetSeriesSuccessResponse = {
+  page: number;
   results: ISeries[];
+  total_pages: number;
 };
 
-export type ApiGetTopRatedSeriesResponse = ApiResponse<ApiGetTopRatedSeriesSuccessResponse, ErrorResponse>;
+export type ApiGetSeriesResponse = ApiResponse<ApiGetSeriesSuccessResponse, ErrorResponse>;
+
+// Search
+
+export type ApiSearchBody = {
+  query: string;
+  page: number;
+};
