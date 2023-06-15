@@ -84,9 +84,26 @@ function* searchMovieWorker({ payload: { page, query } }: PayloadAction<ApiSearc
   }
 }
 
+function* searchSeriesWorker({ payload: { page, query } }: PayloadAction<ApiSearchBody>) {
+  const body: ApiSearchBody = {
+    page,
+    query,
+  };
+  const response: ApiGetSeriesResponse = yield call(apiInstance.tmdb.searchSeries, body);
+
+  if (!isUndefined(response.data)) {
+    if (response.ok) {
+      yield put(tmdbSlice.actions.searchSeriesSuccess(response.data));
+    } else {
+      yield put(tmdbSlice.actions.searchSeriesError(response.data.status_message));
+    }
+  }
+}
+
 export function* tmdbSaga() {
   yield takeLatest(tmdbSlice.actions.getGenres, getGenresWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedMovies, getTopRatedMoviesWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedSeries, getTopRatedSeriesWorker);
   yield takeLatest(tmdbSlice.actions.searchMovie, searchMovieWorker);
+  yield takeLatest(tmdbSlice.actions.searchSeries, searchSeriesWorker);
 }
