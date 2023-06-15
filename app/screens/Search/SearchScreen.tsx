@@ -14,8 +14,8 @@ import { SearchScreenProps } from './SearchScreen.types';
 
 export const SearchScreen: React.ComponentType<SearchScreenProps> = () => {
   const {
-    topRatedMovies: { movies, nextPage: moviesNextPage },
-    topRatedSeries: { series, nextPage: seriesNextPage },
+    topRatedMovies: { movies, nextPage: moviesNextPage, totalPages: moviesTotalPages },
+    topRatedSeries: { series, nextPage: seriesNextPage, totalPages: seriesTotalPages },
   } = useAppSelector(state => state.tmdb);
 
   const dispatch = useAppDispatch();
@@ -26,11 +26,15 @@ export const SearchScreen: React.ComponentType<SearchScreenProps> = () => {
   });
 
   const onMoviesEndReached = () => {
-    dispatch(tmdbSlice.actions.getTopRatedMovies({ page: moviesNextPage }));
+    if (moviesNextPage <= moviesTotalPages) {
+      dispatch(tmdbSlice.actions.getTopRatedMovies({ page: moviesNextPage }));
+    }
   };
 
   const onSeriesEndReached = () => {
-    dispatch(tmdbSlice.actions.getTopRatedSeries({ page: seriesNextPage }));
+    if (seriesNextPage <= seriesTotalPages) {
+      dispatch(tmdbSlice.actions.getTopRatedSeries({ page: seriesNextPage }));
+    }
   };
 
   const renderScene = ({ route }: SceneRendererProps & { route: Route }): React.ReactNode => {
