@@ -31,6 +31,12 @@ interface ITmdbState {
     nextPage: number;
     totalPages: number;
   };
+  searchSeries: {
+    series: ISeries[];
+    currentPage: number;
+    nextPage: number;
+    totalPages: number;
+  };
 }
 
 const INITIAL_STATE: ITmdbState = {
@@ -50,6 +56,12 @@ const INITIAL_STATE: ITmdbState = {
   },
   searchMovie: {
     movies: [],
+    currentPage: 0,
+    nextPage: 1,
+    totalPages: 1,
+  },
+  searchSeries: {
+    series: [],
     currentPage: 0,
     nextPage: 1,
     totalPages: 1,
@@ -110,6 +122,22 @@ export const tmdbSlice = createSlice({
 
     clearSearchMovie(state) {
       state.searchMovie = _.cloneDeep(INITIAL_STATE.searchMovie);
+    },
+
+    searchSeries(state, action: PayloadAction<ApiSearchBody>) {},
+    searchSeriesSuccess(
+      state,
+      { payload: { page, results, total_pages } }: PayloadAction<ApiGetSeriesSuccessResponse>,
+    ) {
+      state.searchSeries.series = _.concat(state.searchSeries.series, results);
+      state.searchSeries.currentPage = page;
+      state.searchSeries.nextPage += 1;
+      state.searchSeries.totalPages = total_pages;
+    },
+    searchSeriesError(state, action: PayloadAction<string>) {},
+
+    clearSearchSeries(state) {
+      state.searchSeries = _.cloneDeep(INITIAL_STATE.searchSeries);
     },
   },
 });

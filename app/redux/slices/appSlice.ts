@@ -16,11 +16,15 @@ const INITIAL_STATE: IAppState = {
     isGetGenres: false,
     isGetTopRatedMovies: false,
     isGetTopRatedSeries: false,
+    isSearchMovie: false,
+    isSearchSeries: false,
   },
   errors: {
     getGenres: null,
     getTopRatedMovies: null,
     getTopRatedSeries: null,
+    searchMovie: null,
+    searchSeries: null,
   },
 };
 
@@ -87,6 +91,20 @@ export const appSlice = createSlice({
       ],
       LoadingType.isGetTopRatedSeries,
       ErrorType.getTopRatedSeries,
+    );
+
+    // Search movie
+    addCases(
+      [tmdbSlice.actions.searchMovie, tmdbSlice.actions.searchMovieSuccess, tmdbSlice.actions.searchMovieError],
+      LoadingType.isSearchMovie,
+      ErrorType.searchMovie,
+    );
+
+    // Search series
+    addCases(
+      [tmdbSlice.actions.searchSeries, tmdbSlice.actions.searchSeriesSuccess, tmdbSlice.actions.searchSeriesError],
+      LoadingType.isSearchSeries,
+      ErrorType.searchSeries,
     );
   },
 });

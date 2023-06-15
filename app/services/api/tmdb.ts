@@ -26,6 +26,9 @@ const getTopRatedSeries = (body: ApiGetTopRatedBody) =>
 const searchMovie = (body: ApiSearchBody) =>
   apiClient.get<ApiGetMoviesSuccessResponse, ErrorResponse>('search/movie', body);
 
+const searchSeries = (body: ApiSearchBody) =>
+  apiClient.get<ApiGetSeriesSuccessResponse, ErrorResponse>('search/tv', body);
+
 export const tmdbApi = {
   getImageUri,
   getMovieGenres,
@@ -33,4 +36,5 @@ export const tmdbApi = {
   getTopRatedMovies,
   getTopRatedSeries,
   searchMovie,
+  searchSeries,
 };
