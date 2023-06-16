@@ -1,3 +1,5 @@
+import { Nullable } from '#types/nullable';
+
 export interface ISeries {
   adult: boolean;
   backdrop_path: string;
@@ -8,7 +10,7 @@ export interface ISeries {
   original_name: string;
   overview: string;
   popularity: number;
-  poster_path: string;
+  poster_path: Nullable<string>;
   first_air_date: string;
   name: string;
   vote_average: number;

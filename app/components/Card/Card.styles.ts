@@ -5,6 +5,7 @@ import { COLORS } from '#themes/colors';
 interface ICardStyles {
   container: ViewStyle;
   poster: ImageStyle;
+  noImage: ViewStyle;
   info: ViewStyle;
   genre: ViewStyle;
   ratingContainer: ViewStyle;
@@ -26,6 +27,16 @@ export const styles = StyleSheet.create<ICardStyles>({
     marginRight: 16,
 
     borderRadius: 4,
+  },
+  noImage: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 75,
+    marginRight: 16,
+
+    borderRadius: 4,
+    backgroundColor: COLORS.PRIMARY[300],
   },
   info: {
     flex: 1,

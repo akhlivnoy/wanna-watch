@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { FlatList } from 'react-native';
 
 import { Card, CardState } from '#components';
-import { useAppSelector } from '#hooks';
+import { useAppSelector, useSpecificKeyExtractor } from '#hooks';
 import { IGenre, ISeries } from '#models';
 import { apiInstance } from '#services/api';
 
@@ -20,7 +20,7 @@ const SearchSeriesTabComponent: React.ComponentType<ISearchSeriesTabProps> = ({ 
       <Card
         date={item.first_air_date}
         genres={genres}
-        posterUri={apiInstance.tmdb.getImageUri(item.poster_path)}
+        posterUri={item.poster_path && apiInstance.tmdb.getImageUri(item.poster_path)}
         rating={item.vote_average}
         state={CardState.NotAdded}
         style={styles.card}
@@ -32,6 +32,7 @@ const SearchSeriesTabComponent: React.ComponentType<ISearchSeriesTabProps> = ({ 
   return (
     <FlatList
       data={data}
+      keyExtractor={useSpecificKeyExtractor<ISeries>('series', 'id')}
       renderItem={renderItem}
       style={styles.container}
       onEndReached={onEndReached}

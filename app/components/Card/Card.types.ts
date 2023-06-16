@@ -1,12 +1,13 @@
 import { TouchableOpacityProps } from 'react-native';
 
 import { IGenre } from '#models';
+import { Nullable } from '#types/nullable';
 
 import { CardState } from './Card.data';
 
 export interface ICardProps extends TouchableOpacityProps {
   state: CardState;
-  posterUri: string;
+  posterUri: Nullable<string>;
   title: string;
   date: string;
   rating: number;

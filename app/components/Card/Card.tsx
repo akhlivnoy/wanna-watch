@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React from 'react';
+import React, { memo } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
@@ -11,17 +11,27 @@ import { styles } from './Card.styles';
 import { ICardProps } from './Card.types';
 
 const StarStrokeIcon = SVG.StarStroke;
+const NoImageIcon = SVG.NoImage;
 
-export const Card: React.ComponentType<ICardProps> = ({ posterUri, title, genres, date, rating, style, ...rest }) => (
+const CardComponent: React.ComponentType<ICardProps> = ({ posterUri, title, genres, date, rating, style, ...rest }) => (
   <TouchableOpacity
     style={[styles.container, style]}
     {...rest}
   >
     {/* //? Poster */}
-    <Image
-      source={{ uri: posterUri }}
-      style={styles.poster}
-    />
+    {posterUri ? (
+      <Image
+        source={{ uri: posterUri }}
+        style={styles.poster}
+      />
+    ) : (
+      <View style={styles.noImage}>
+        <NoImageIcon
+          height={40}
+          width={40}
+        />
+      </View>
+    )}
 
     <View style={styles.info}>
       <ExtendedText
@@ -57,7 +67,7 @@ export const Card: React.ComponentType<ICardProps> = ({ posterUri, title, genres
             preset="regular14"
             style={styles.ratingText}
           >
-            {rating} / 10
+            {rating.toFixed(1)} / 10
           </ExtendedText>
 
           <StarStrokeIcon
@@ -70,3 +80,4 @@ export const Card: React.ComponentType<ICardProps> = ({ posterUri, title, genres
     </View>
   </TouchableOpacity>
 );
+export const Card = memo(CardComponent);

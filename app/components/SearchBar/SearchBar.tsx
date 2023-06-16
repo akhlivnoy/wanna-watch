@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { TextInput, View, ViewStyle } from 'react-native';
+import React, { memo, useMemo, useState } from 'react';
+import { NativeSyntheticEvent, Pressable, TextInput, TextInputFocusEventData, View, ViewStyle } from 'react-native';
 
 import { SVG } from '#assets/svg';
 import { COLORS } from '#themes/colors';
@@ -9,7 +9,14 @@ import { ISearchBarProps } from './SearchBar.types';
 
 const SearchIcon = SVG.Search;
 
-export const SearchBar: React.ComponentType<ISearchBarProps> = ({ style, containerStyle, onChangeText, ...props }) => {
+const SearchBarComponent: React.ComponentType<ISearchBarProps> = ({
+  style,
+  containerStyle,
+  onChangeText,
+  onBlur,
+  onIconPress,
+  ...props
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [currentColor, setCurrentColor] = useState(COLORS.PRIMARY[300]);
@@ -27,7 +34,10 @@ export const SearchBar: React.ComponentType<ISearchBarProps> = ({ style, contain
     setCurrentColor(COLORS.ACCENT[300]);
   };
 
-  const onBlur = () => {
+  const onInputBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    if (onBlur) {
+      onBlur(e);
+    }
     setIsFocused(false);
     setCurrentColor(inputValue === '' ? COLORS.PRIMARY[300] : COLORS.ACCENT[400]);
   };
@@ -45,12 +55,16 @@ export const SearchBar: React.ComponentType<ISearchBarProps> = ({ style, contain
         placeholder="Search..."
         placeholderTextColor={COLORS.PRIMARY[300]}
         style={[styles.input, style]}
-        onBlur={onBlur}
+        onBlur={onInputBlur}
         onChangeText={onChangeInputText}
         onFocus={onFocus}
         {...props}
       />
-      <SearchIcon color={currentColor} />
+      <Pressable onPress={onIconPress}>
+        <SearchIcon color={currentColor} />
+      </Pressable>
     </View>
   );
 };
+
+export const SearchBar = memo(SearchBarComponent);
