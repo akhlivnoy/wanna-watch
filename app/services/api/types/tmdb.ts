@@ -1,6 +1,6 @@
 import { ApiResponse } from 'apisauce';
 
-import { IGenre, IMovie, IMovieDetails, ISeries } from '#models';
+import { IGenre, IMovie, IMovieDetails, ISeries, ISeriesDetails } from '#models';
 import { ErrorResponse } from '#types/api';
 
 // Get genres
@@ -36,6 +36,8 @@ export type ApiGetSeriesSuccessResponse = {
 };
 
 export type ApiGetSeriesResponse = ApiResponse<ApiGetSeriesSuccessResponse, ErrorResponse>;
+
+export type ApiGetSeriesDetailsResponse = ApiResponse<ISeriesDetails, ErrorResponse>;
 
 // Search
 

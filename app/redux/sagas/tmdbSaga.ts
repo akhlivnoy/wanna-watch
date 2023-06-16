@@ -9,6 +9,7 @@ import {
   ApiGetGenresResponse,
   ApiGetMovieDetailsResponse,
   ApiGetMoviesResponse,
+  ApiGetSeriesDetailsResponse,
   ApiGetSeriesResponse,
   ApiGetTopRatedBody,
   ApiSearchBody,
@@ -113,6 +114,18 @@ function* getMovieDetailsWorker({ payload }: PayloadAction<number>) {
   }
 }
 
+function* getSeriesDetailsWorker({ payload }: PayloadAction<number>) {
+  const response: ApiGetSeriesDetailsResponse = yield call(apiInstance.tmdb.getSeriesDetails, payload);
+
+  if (!isUndefined(response.data)) {
+    if (response.ok) {
+      yield put(tmdbSlice.actions.getSeriesDetailsSuccess(response.data));
+    } else {
+      yield put(tmdbSlice.actions.getSeriesDetailsError(response.data.status_message));
+    }
+  }
+}
+
 export function* tmdbSaga() {
   yield takeLatest(tmdbSlice.actions.getGenres, getGenresWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedMovies, getTopRatedMoviesWorker);
@@ -125,4 +138,5 @@ export function* tmdbSaga() {
   yield takeLatest(tmdbSlice.actions.loadSearchedSeries, searchSeriesWorker);
 
   yield takeLatest(tmdbSlice.actions.getMovieDetails, getMovieDetailsWorker);
+  yield takeLatest(tmdbSlice.actions.getSeriesDetails, getSeriesDetailsWorker);
 }
