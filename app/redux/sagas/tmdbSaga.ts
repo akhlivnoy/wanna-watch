@@ -7,6 +7,7 @@ import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
 import {
   ApiGetGenresResponse,
+  ApiGetMovieDetailsResponse,
   ApiGetMoviesResponse,
   ApiGetSeriesResponse,
   ApiGetTopRatedBody,
@@ -100,6 +101,18 @@ function* searchSeriesWorker({ payload: { page, query } }: PayloadAction<ApiSear
   }
 }
 
+function* getMovieDetailsWorker({ payload }: PayloadAction<number>) {
+  const response: ApiGetMovieDetailsResponse = yield call(apiInstance.tmdb.getMovieDetails, payload);
+
+  if (!isUndefined(response.data)) {
+    if (response.ok) {
+      yield put(tmdbSlice.actions.getMovieDetailsSuccess(response.data));
+    } else {
+      yield put(tmdbSlice.actions.getMovieDetailsError(response.data.status_message));
+    }
+  }
+}
+
 export function* tmdbSaga() {
   yield takeLatest(tmdbSlice.actions.getGenres, getGenresWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedMovies, getTopRatedMoviesWorker);
@@ -110,4 +123,6 @@ export function* tmdbSaga() {
 
   yield takeLatest(tmdbSlice.actions.searchSeries, searchSeriesWorker);
   yield takeLatest(tmdbSlice.actions.loadSearchedSeries, searchSeriesWorker);
+
+  yield takeLatest(tmdbSlice.actions.getMovieDetails, getMovieDetailsWorker);
 }

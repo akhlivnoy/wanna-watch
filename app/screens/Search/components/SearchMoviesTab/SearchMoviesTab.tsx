@@ -3,8 +3,9 @@ import React, { memo } from 'react';
 import { FlatList } from 'react-native';
 
 import { Card, CardState } from '#components';
-import { useAppSelector, useSpecificKeyExtractor } from '#hooks';
+import { useAppDispatch, useAppSelector, useSpecificKeyExtractor } from '#hooks';
 import { IGenre, IMovie } from '#models';
+import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
 
 import { styles } from './SearchMoviesTab.styles';
@@ -12,9 +13,13 @@ import { ISearchMoviesTabProps } from './SearchMoviesTab.types';
 
 const SearchMoviesTabComponent: React.ComponentType<ISearchMoviesTabProps> = ({ data, onEndReached }) => {
   const { movieGenres } = useAppSelector(state => state.tmdb);
+  const dispatch = useAppDispatch();
 
   const renderItem = ({ item }: { item: IMovie }) => {
     const genres: IGenre[] = _.filter(movieGenres, genre => _.includes(item.genre_ids, genre.id)).slice(0, 3);
+    const onPress = () => {
+      dispatch(tmdbSlice.actions.getMovieDetails(item.id));
+    };
 
     return (
       <Card
@@ -25,6 +30,7 @@ const SearchMoviesTabComponent: React.ComponentType<ISearchMoviesTabProps> = ({ 
         state={CardState.NotAdded}
         style={styles.card}
         title={item.title}
+        onPress={onPress}
       />
     );
   };
