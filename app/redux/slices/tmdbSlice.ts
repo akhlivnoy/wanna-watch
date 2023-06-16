@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
-import { IGenre, IMovie, IMovieDetails, ISeries } from '#models';
+import { IGenre, IMovie, IMovieDetails, ISeries, ISeriesDetails } from '#models';
 import { GetGenresSuccessAction } from '#redux/types';
 import {
   ApiGetMoviesSuccessResponse,
@@ -39,6 +39,7 @@ interface ITmdbState {
     totalPages: number;
   };
   movieDetails: Nullable<IMovieDetails>;
+  seriesDetails: Nullable<ISeriesDetails>;
 }
 
 const INITIAL_STATE: ITmdbState = {
@@ -69,6 +70,7 @@ const INITIAL_STATE: ITmdbState = {
     totalPages: 1,
   },
   movieDetails: null,
+  seriesDetails: null,
 };
 
 export const tmdbSlice = createSlice({
@@ -154,10 +156,18 @@ export const tmdbSlice = createSlice({
       state.searchedSeries = _.cloneDeep(INITIAL_STATE.searchedSeries);
     },
 
+    //* Movie details
     getMovieDetails(state, action: PayloadAction<number>) {},
     getMovieDetailsSuccess(state, { payload }: PayloadAction<IMovieDetails>) {
       state.movieDetails = payload;
     },
     getMovieDetailsError(state, action: PayloadAction<string>) {},
+
+    //* Series details
+    getSeriesDetails(state, action: PayloadAction<number>) {},
+    getSeriesDetailsSuccess(state, { payload }: PayloadAction<ISeriesDetails>) {
+      state.seriesDetails = payload;
+    },
+    getSeriesDetailsError(state, action: PayloadAction<string>) {},
   },
 });

@@ -19,6 +19,7 @@ const INITIAL_STATE: IAppState = {
     isSearchMovie: false,
     isSearchSeries: false,
     isGetMovieDetails: false,
+    isGetSeriesDetails: false,
   },
   errors: {
     getGenres: null,
@@ -27,6 +28,7 @@ const INITIAL_STATE: IAppState = {
     searchMovie: null,
     searchSeries: null,
     getMovieDetails: null,
+    getSeriesDetails: null,
   },
 };
 
@@ -118,6 +120,17 @@ export const appSlice = createSlice({
       ],
       LoadingType.isGetMovieDetails,
       ErrorType.getMovieDetails,
+    );
+
+    // Get searched series details
+    addCases(
+      [
+        tmdbSlice.actions.getSeriesDetails,
+        tmdbSlice.actions.getSeriesDetailsSuccess,
+        tmdbSlice.actions.getSeriesDetailsError,
+      ],
+      LoadingType.isGetSeriesDetails,
+      ErrorType.getSeriesDetails,
     );
   },
 });

@@ -3,8 +3,9 @@ import React, { memo } from 'react';
 import { FlatList } from 'react-native';
 
 import { Card, CardState } from '#components';
-import { useAppSelector, useSpecificKeyExtractor } from '#hooks';
+import { useAppDispatch, useAppSelector, useSpecificKeyExtractor } from '#hooks';
 import { IGenre, ISeries } from '#models';
+import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
 
 import { styles } from './SearchSeriesTab.styles';
@@ -12,9 +13,14 @@ import { ISearchSeriesTabProps } from './SearchSeriesTab.types';
 
 const SearchSeriesTabComponent: React.ComponentType<ISearchSeriesTabProps> = ({ data, onEndReached }) => {
   const { seriesGenres } = useAppSelector(state => state.tmdb);
+  const dispatch = useAppDispatch();
 
   const renderItem = ({ item }: { item: ISeries }) => {
     const genres: IGenre[] = _.filter(seriesGenres, genre => _.includes(item.genre_ids, genre.id)).slice(0, 3);
+
+    const onPress = () => {
+      dispatch(tmdbSlice.actions.getSeriesDetails(item.id));
+    };
 
     return (
       <Card
@@ -25,6 +31,7 @@ const SearchSeriesTabComponent: React.ComponentType<ISearchSeriesTabProps> = ({ 
         state={CardState.NotAdded}
         style={styles.card}
         title={item.name}
+        onPress={onPress}
       />
     );
   };

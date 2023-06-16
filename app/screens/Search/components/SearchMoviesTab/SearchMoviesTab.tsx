@@ -17,6 +17,7 @@ const SearchMoviesTabComponent: React.ComponentType<ISearchMoviesTabProps> = ({ 
 
   const renderItem = ({ item }: { item: IMovie }) => {
     const genres: IGenre[] = _.filter(movieGenres, genre => _.includes(item.genre_ids, genre.id)).slice(0, 3);
+
     const onPress = () => {
       dispatch(tmdbSlice.actions.getMovieDetails(item.id));
     };

@@ -5,6 +5,7 @@ export enum ErrorType {
   searchMovie = 'searchMovie',
   searchSeries = 'searchSeries',
   getMovieDetails = 'getMovieDetails',
+  getSeriesDetails = 'getSeriesDetails',
 }
 
 export enum LoadingType {
@@ -14,4 +15,5 @@ export enum LoadingType {
   isSearchMovie = 'isSearchMovie',
   isSearchSeries = 'isSearchSeries',
   isGetMovieDetails = 'isGetMovieDetails',
+  isGetSeriesDetails = 'isGetSeriesDetails',
 }
