@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
-import { IGenre, IMovie, ISeries } from '#models';
+import { IGenre, IMovie, IMovieDetails, ISeries } from '#models';
 import { GetGenresSuccessAction } from '#redux/types';
 import {
   ApiGetMoviesSuccessResponse,
@@ -9,6 +9,7 @@ import {
   ApiGetTopRatedBody,
   ApiSearchBody,
 } from '#services/api/types';
+import { Nullable } from '#types/nullable';
 
 interface ITmdbState {
   movieGenres: IGenre[];
@@ -37,6 +38,7 @@ interface ITmdbState {
     nextPage: number;
     totalPages: number;
   };
+  movieDetails: Nullable<IMovieDetails>;
 }
 
 const INITIAL_STATE: ITmdbState = {
@@ -66,6 +68,7 @@ const INITIAL_STATE: ITmdbState = {
     nextPage: 1,
     totalPages: 1,
   },
+  movieDetails: null,
 };
 
 export const tmdbSlice = createSlice({
@@ -150,5 +153,11 @@ export const tmdbSlice = createSlice({
     clearSearchSeries(state) {
       state.searchedSeries = _.cloneDeep(INITIAL_STATE.searchedSeries);
     },
+
+    getMovieDetails(state, action: PayloadAction<number>) {},
+    getMovieDetailsSuccess(state, { payload }: PayloadAction<IMovieDetails>) {
+      state.movieDetails = payload;
+    },
+    getMovieDetailsError(state, action: PayloadAction<string>) {},
   },
 });

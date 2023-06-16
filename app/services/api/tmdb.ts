@@ -1,3 +1,4 @@
+import { IMovieDetails } from '#models';
 import { ErrorResponse } from '#types/api';
 
 // eslint-disable-next-line restrict-imports/restrict-imports
@@ -29,6 +30,11 @@ const searchMovie = (body: ApiSearchBody) =>
 const searchSeries = (body: ApiSearchBody) =>
   apiClient.get<ApiGetSeriesSuccessResponse, ErrorResponse>('search/tv', body);
 
+const getMovieDetails = (movieId: number) =>
+  apiClient.get<IMovieDetails, ErrorResponse>(`movie/${movieId}`, {
+    append_to_response: 'credits',
+  });
+
 export const tmdbApi = {
   getImageUri,
   getMovieGenres,
@@ -37,4 +43,5 @@ export const tmdbApi = {
   getTopRatedSeries,
   searchMovie,
   searchSeries,
+  getMovieDetails,
 };
