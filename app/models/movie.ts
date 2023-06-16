@@ -1,3 +1,5 @@
+import { Nullable } from '#types/nullable';
+
 export interface IMovie {
   adult: boolean;
   backdrop_path: string;
@@ -7,7 +9,7 @@ export interface IMovie {
   original_title: string;
   overview: string;
   popularity: number;
-  poster_path: string;
+  poster_path: Nullable<string>;
   release_date: string;
   title: string;
   video: boolean;

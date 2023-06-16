@@ -25,13 +25,13 @@ interface ITmdbState {
     nextPage: number;
     totalPages: number;
   };
-  searchMovie: {
+  searchedMovie: {
     movies: IMovie[];
     currentPage: number;
     nextPage: number;
     totalPages: number;
   };
-  searchSeries: {
+  searchedSeries: {
     series: ISeries[];
     currentPage: number;
     nextPage: number;
@@ -54,13 +54,13 @@ const INITIAL_STATE: ITmdbState = {
     nextPage: 1,
     totalPages: 1,
   },
-  searchMovie: {
+  searchedMovie: {
     movies: [],
     currentPage: 0,
     nextPage: 1,
     totalPages: 1,
   },
-  searchSeries: {
+  searchedSeries: {
     series: [],
     currentPage: 0,
     nextPage: 1,
@@ -72,6 +72,7 @@ export const tmdbSlice = createSlice({
   name: 'tmdb',
   initialState: INITIAL_STATE,
   reducers: {
+    //* Genres
     getGenres(state) {},
     getGenresSuccess(state, { payload: { movie, series } }: GetGenresSuccessAction) {
       state.movieGenres = movie.genres;
@@ -79,6 +80,7 @@ export const tmdbSlice = createSlice({
     },
     getGenresError(state, action: PayloadAction<string>) {},
 
+    //* Top rated movies
     getTopRatedMovies(state, action: PayloadAction<ApiGetTopRatedBody>) {},
     getTopRatedMoviesSuccess(
       state,
@@ -95,6 +97,7 @@ export const tmdbSlice = createSlice({
       state.topRatedMovies = _.cloneDeep(INITIAL_STATE.topRatedMovies);
     },
 
+    //* Top rated series
     getTopRatedSeries(state, action: PayloadAction<ApiGetTopRatedBody>) {},
     getTopRatedSeriesSuccess(
       state,
@@ -111,33 +114,41 @@ export const tmdbSlice = createSlice({
       state.topRatedSeries = _.cloneDeep(INITIAL_STATE.topRatedSeries);
     },
 
-    searchMovie(state, action: PayloadAction<ApiSearchBody>) {},
+    //* Searched movie
+    searchMovie(state, action: PayloadAction<ApiSearchBody>) {
+      state.searchedMovie = _.cloneDeep(INITIAL_STATE.searchedMovie);
+    },
+    loadSearchedMovie(state, action: PayloadAction<ApiSearchBody>) {},
     searchMovieSuccess(state, { payload: { page, results, total_pages } }: PayloadAction<ApiGetMoviesSuccessResponse>) {
-      state.searchMovie.movies = _.concat(state.searchMovie.movies, results);
-      state.searchMovie.currentPage = page;
-      state.searchMovie.nextPage += 1;
-      state.searchMovie.totalPages = total_pages;
+      state.searchedMovie.movies = _.concat(state.searchedMovie.movies, results);
+      state.searchedMovie.currentPage = page;
+      state.searchedMovie.nextPage += 1;
+      state.searchedMovie.totalPages = total_pages;
     },
     searchMovieError(state, action: PayloadAction<string>) {},
 
     clearSearchMovie(state) {
-      state.searchMovie = _.cloneDeep(INITIAL_STATE.searchMovie);
+      state.searchedMovie = _.cloneDeep(INITIAL_STATE.searchedMovie);
     },
 
-    searchSeries(state, action: PayloadAction<ApiSearchBody>) {},
+    //* Searched series
+    searchSeries(state, action: PayloadAction<ApiSearchBody>) {
+      state.searchedSeries = _.cloneDeep(INITIAL_STATE.searchedSeries);
+    },
+    loadSearchedSeries(state, action: PayloadAction<ApiSearchBody>) {},
     searchSeriesSuccess(
       state,
       { payload: { page, results, total_pages } }: PayloadAction<ApiGetSeriesSuccessResponse>,
     ) {
-      state.searchSeries.series = _.concat(state.searchSeries.series, results);
-      state.searchSeries.currentPage = page;
-      state.searchSeries.nextPage += 1;
-      state.searchSeries.totalPages = total_pages;
+      state.searchedSeries.series = _.concat(state.searchedSeries.series, results);
+      state.searchedSeries.currentPage = page;
+      state.searchedSeries.nextPage += 1;
+      state.searchedSeries.totalPages = total_pages;
     },
     searchSeriesError(state, action: PayloadAction<string>) {},
 
     clearSearchSeries(state) {
-      state.searchSeries = _.cloneDeep(INITIAL_STATE.searchSeries);
+      state.searchedSeries = _.cloneDeep(INITIAL_STATE.searchedSeries);
     },
   },
 });

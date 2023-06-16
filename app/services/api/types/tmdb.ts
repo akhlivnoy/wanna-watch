@@ -39,5 +39,5 @@ export type ApiGetSeriesResponse = ApiResponse<ApiGetSeriesSuccessResponse, Erro
 
 export type ApiSearchBody = {
   query: string;
-  page: number;
+  page?: number;
 };

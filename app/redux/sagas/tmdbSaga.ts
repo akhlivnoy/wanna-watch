@@ -104,6 +104,10 @@ export function* tmdbSaga() {
   yield takeLatest(tmdbSlice.actions.getGenres, getGenresWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedMovies, getTopRatedMoviesWorker);
   yield takeLatest(tmdbSlice.actions.getTopRatedSeries, getTopRatedSeriesWorker);
+
   yield takeLatest(tmdbSlice.actions.searchMovie, searchMovieWorker);
+  yield takeLatest(tmdbSlice.actions.loadSearchedMovie, searchMovieWorker);
+
   yield takeLatest(tmdbSlice.actions.searchSeries, searchSeriesWorker);
+  yield takeLatest(tmdbSlice.actions.loadSearchedSeries, searchSeriesWorker);
 }

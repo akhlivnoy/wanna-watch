@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Route, TabBar, TabBarProps, TabView } from 'react-native-tab-view';
 
 import { COLORS } from '#themes/colors';
@@ -6,7 +6,7 @@ import { COLORS } from '#themes/colors';
 import { styles } from './TopTabs.styles';
 import { ITopTabsProps } from './TopTabs.types';
 
-export const TopTabs: React.ComponentType<ITopTabsProps> = ({ routes, renderScene, style, tabBarStyle }) => {
+const TopTabsComponent: React.ComponentType<ITopTabsProps> = ({ routes, renderScene, style, tabBarStyle }) => {
   const [index, setIndex] = useState(0);
 
   const renderTabBar = useCallback(
@@ -37,3 +37,5 @@ export const TopTabs: React.ComponentType<ITopTabsProps> = ({ routes, renderScen
     />
   );
 };
+
+export const TopTabs = memo(TopTabsComponent);
