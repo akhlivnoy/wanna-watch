@@ -1,6 +1,6 @@
 import apisauce, { ApisauceInstance } from 'apisauce';
 
-import { TMDB_HEADERS } from '#constants/tmdb';
+import { TMDB_HEADERS } from '#constants';
 
 // eslint-disable-next-line restrict-imports/restrict-imports
 import CONFIG from '../../config/env';

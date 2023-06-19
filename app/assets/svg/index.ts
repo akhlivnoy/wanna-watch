@@ -1,3 +1,5 @@
+import { LeftArrowIcon } from './LeftArrowIcon';
+import { LogoNameIcon } from './LogoNameIcon';
 import { LogoWithDescriptionIcon } from './LogoWithDescriptionIcon';
 import { MoviesIcon } from './MoviesIcon';
 import { NoImageIcon } from './NoImageIcon';
@@ -6,10 +8,12 @@ import { SeriesIcon } from './SeriesIcon';
 import { StarStrokeIcon } from './StarStrokeIcon';
 
 export const SVG = {
+  LeftArrow: LeftArrowIcon,
+  LogoName: LogoNameIcon,
   LogoWithDescription: LogoWithDescriptionIcon,
   Movies: MoviesIcon,
+  NoImage: NoImageIcon,
   Search: SearchIcon,
   Series: SeriesIcon,
   StarStroke: StarStrokeIcon,
-  NoImage: NoImageIcon,
 };
