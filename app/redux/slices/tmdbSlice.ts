@@ -162,6 +162,9 @@ export const tmdbSlice = createSlice({
       state.movieDetails = payload;
     },
     getMovieDetailsError(state, action: PayloadAction<string>) {},
+    clearMovieDetails(state) {
+      state.movieDetails = null;
+    },
 
     //* Series details
     getSeriesDetails(state, action: PayloadAction<number>) {},
@@ -169,5 +172,8 @@ export const tmdbSlice = createSlice({
       state.seriesDetails = payload;
     },
     getSeriesDetailsError(state, action: PayloadAction<string>) {},
+    clearSeriesDetails(state) {
+      state.seriesDetails = null;
+    },
   },
 });
