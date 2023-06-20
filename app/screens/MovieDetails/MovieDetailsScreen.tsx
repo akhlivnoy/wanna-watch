@@ -1,4 +1,5 @@
-import React from 'react';
+import _ from 'lodash';
+import React, { useMemo } from 'react';
 import { Image, SafeAreaView, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
@@ -7,11 +8,34 @@ import { useAppSelector } from '#hooks';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
 
+import { DetailCard, DetailCardType, IDetailCard } from './components';
 import { styles } from './MovieDetailsScreen.styles';
 import { MovieDetailsScreenProps } from './MovieDetailsScreen.types';
 
 export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = ({ navigation }) => {
   const { movieDetails } = useAppSelector(state => state.tmdb);
+
+  const detailCards = useMemo(
+    (): ReadonlyArray<IDetailCard> =>
+      movieDetails
+        ? [
+            {
+              value: movieDetails.runtime,
+              type: DetailCardType.RunTime,
+            },
+            {
+              value: movieDetails.vote_average,
+              type: DetailCardType.Rating,
+            },
+            {
+              value: movieDetails.production_countries[0].iso_3166_1,
+              type: DetailCardType.Country,
+            },
+          ]
+        : [],
+    [movieDetails],
+  );
+
   return (
     <SafeAreaView style={generalStyles.blackFlex}>
       <MainHeader
@@ -37,6 +61,15 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
               </View>
             )
           }
+          <View style={styles.detailCards}>
+            {_.map(detailCards, ({ value, type }) => (
+              <DetailCard
+                key={type + value}
+                type={type}
+                value={value}
+              />
+            ))}
+          </View>
         </View>
       </View>
     </SafeAreaView>

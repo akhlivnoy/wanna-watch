@@ -1,3 +1,4 @@
+import { ClockIcon } from './ClockIcon';
 import { LeftArrowIcon } from './LeftArrowIcon';
 import { LogoNameIcon } from './LogoNameIcon';
 import { LogoWithDescriptionIcon } from './LogoWithDescriptionIcon';
@@ -8,6 +9,7 @@ import { SeriesIcon } from './SeriesIcon';
 import { StarStrokeIcon } from './StarStrokeIcon';
 
 export const SVG = {
+  Clock: ClockIcon,
   LeftArrow: LeftArrowIcon,
   LogoName: LogoNameIcon,
   LogoWithDescription: LogoWithDescriptionIcon,

@@ -6,19 +6,21 @@ interface IMovieDetailsScreenStyles {
   container: ViewStyle;
   poster: ImageStyle;
   noImage: ViewStyle;
+  detailCards: ViewStyle;
 }
 
 export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
   container: {
     flex: 1,
     paddingTop: 16,
-    paddingLeft: 16,
+    paddingHorizontal: 16,
 
     backgroundColor: COLORS.PRIMARY[500],
   },
   poster: {
     width: 170,
     height: 250,
+    marginRight: 16,
 
     borderRadius: 8,
   },
@@ -31,5 +33,10 @@ export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
 
     borderRadius: 8,
     backgroundColor: COLORS.PRIMARY[300],
+  },
+  detailCards: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
