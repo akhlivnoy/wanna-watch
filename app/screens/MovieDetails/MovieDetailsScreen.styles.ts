@@ -35,7 +35,6 @@ export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
     backgroundColor: COLORS.PRIMARY[300],
   },
   detailCards: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

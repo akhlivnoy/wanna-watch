@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 
 import { Card, CardState } from '#components';
 import { useAppDispatch, useAppSelector, useSpecificKeyExtractor } from '#hooks';
-import { IGenre, IMovie } from '#models';
+import { IMovie, IMovieGenre } from '#models';
 import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
 
@@ -16,7 +16,7 @@ const SearchMoviesTabComponent: React.ComponentType<ISearchMoviesTabProps> = ({ 
   const dispatch = useAppDispatch();
 
   const renderItem = ({ item }: { item: IMovie }) => {
-    const genres: IGenre[] = _.filter(movieGenres, genre => _.includes(item.genre_ids, genre.id)).slice(0, 3);
+    const genres: IMovieGenre[] = _.filter(movieGenres, genre => _.includes(item.genre_ids, genre.id)).slice(0, 3);
 
     const onPress = () => {
       dispatch(tmdbSlice.actions.getMovieDetails(item.id));

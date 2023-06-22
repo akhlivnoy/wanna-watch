@@ -1,8 +1,8 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import { ApiGetGenresSuccessResponse } from '#services/api/types';
+import { ApiGetMovieGenresSuccessResponse, ApiGetSeriesGenresSuccessResponse } from '#services/api/types';
 
 export type GetGenresSuccessAction = PayloadAction<{
-  movie: ApiGetGenresSuccessResponse;
-  series: ApiGetGenresSuccessResponse;
+  movie: ApiGetMovieGenresSuccessResponse;
+  series: ApiGetSeriesGenresSuccessResponse;
 }>;

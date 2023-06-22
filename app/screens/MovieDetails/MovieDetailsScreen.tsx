@@ -61,14 +61,27 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
               </View>
             )
           }
-          <View style={styles.detailCards}>
-            {_.map(detailCards, ({ value, type }) => (
-              <DetailCard
-                key={type + value}
-                type={type}
-                value={value}
-              />
-            ))}
+
+          <View style={generalStyles.flex}>
+            {/* //? Detail cards */}
+            <View style={styles.detailCards}>
+              {_.map(detailCards, ({ value, type }) => (
+                <DetailCard
+                  key={type + value}
+                  type={type}
+                  value={value}
+                />
+              ))}
+            </View>
+            {/* <View style={generalStyles.flex}>
+              {movieDetails &&
+                _.map(movieDetails.genres, genre => (
+                  <Genre
+                    key={genre.name}
+                    name={genre.name}
+                  />
+                ))}
+            </View> */}
           </View>
         </View>
       </View>

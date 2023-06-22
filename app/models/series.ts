@@ -1,6 +1,6 @@
 import { Nullable } from '#types/nullable';
 
-import { IGenre } from './genre';
+import { ISeriesGenre } from './genre';
 
 export interface ISeries {
   adult: boolean;
@@ -25,7 +25,7 @@ export interface ISeriesDetails {
   created_by: ICreatedBy[];
   episode_run_time: number[];
   first_air_date: string;
-  genres: IGenre[];
+  genres: ISeriesGenre[];
   homepage: string;
   id: number;
   in_production: boolean;

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
-import { IGenre, IMovie, IMovieDetails, ISeries, ISeriesDetails } from '#models';
+import { IMovie, IMovieDetails, IMovieGenre, ISeries, ISeriesDetails, ISeriesGenre } from '#models';
 import { GetGenresSuccessAction } from '#redux/types';
 import {
   ApiGetMoviesSuccessResponse,
@@ -12,8 +12,8 @@ import {
 import { Nullable } from '#types/nullable';
 
 interface ITmdbState {
-  movieGenres: IGenre[];
-  seriesGenres: IGenre[];
+  movieGenres: IMovieGenre[];
+  seriesGenres: ISeriesGenre[];
   topRatedMovies: {
     movies: IMovie[];
     currentPage: number;

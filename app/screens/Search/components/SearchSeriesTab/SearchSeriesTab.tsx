@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 
 import { Card, CardState } from '#components';
 import { useAppDispatch, useAppSelector, useSpecificKeyExtractor } from '#hooks';
-import { IGenre, ISeries } from '#models';
+import { ISeries, ISeriesGenre } from '#models';
 import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
 
@@ -16,7 +16,7 @@ const SearchSeriesTabComponent: React.ComponentType<ISearchSeriesTabProps> = ({ 
   const dispatch = useAppDispatch();
 
   const renderItem = ({ item }: { item: ISeries }) => {
-    const genres: IGenre[] = _.filter(seriesGenres, genre => _.includes(item.genre_ids, genre.id)).slice(0, 3);
+    const genres: ISeriesGenre[] = _.filter(seriesGenres, genre => _.includes(item.genre_ids, genre.id)).slice(0, 3);
 
     const onPress = () => {
       dispatch(tmdbSlice.actions.getSeriesDetails(item.id));

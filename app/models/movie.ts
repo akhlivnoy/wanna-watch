@@ -1,7 +1,7 @@
 import { Nullable } from '#types/nullable';
 
 import { ICredits } from './credits';
-import { IGenre } from './genre';
+import { IMovieGenre } from './genre';
 
 export interface IMovie {
   adult: boolean;
@@ -30,7 +30,7 @@ export interface IMovieDetails {
     backdrop_path: string;
   };
   budget: number;
-  genres: IGenre[];
+  genres: IMovieGenre[];
   homepage: string;
   id: number;
   imdb_id: string;
