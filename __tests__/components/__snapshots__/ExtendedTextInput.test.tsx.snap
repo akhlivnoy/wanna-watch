@@ -4,18 +4,18 @@ exports[`UI: ExtendedTextInput should match snapshot 1`] = `
 <View>
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "#ECECEC",
         },
-        Object {
+        {
           "fontFamily": "SourceSans3-Regular",
           "fontSize": 16,
           "lineHeight": 24,
         },
-        Array [
-          Object {},
-          Object {
+        [
+          {},
+          {
             "color": "red",
             "marginBottom": 10,
           },
@@ -28,11 +28,11 @@ exports[`UI: ExtendedTextInput should match snapshot 1`] = `
   <TextInput
     onChangeText={[Function]}
     style={
-      Array [
-        Object {
+      [
+        {
           "borderBottomWidth": 1,
         },
-        Object {
+        {
           "backgroundColor": "yellow",
         },
       ]
@@ -41,18 +41,18 @@ exports[`UI: ExtendedTextInput should match snapshot 1`] = `
   />
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "#ECECEC",
         },
-        Object {
+        {
           "fontFamily": "SourceSans3-Regular",
           "fontSize": 16,
           "lineHeight": 24,
         },
-        Array [
-          Object {},
-          Object {
+        [
+          {},
+          {
             "color": "red",
             "marginTop": 10,
           },
@@ -69,18 +69,18 @@ exports[`UI: ExtendedTextInput should match snapshot 2`] = `
 <View>
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "#ECECEC",
         },
-        Object {
+        {
           "fontFamily": "SourceSans3-Regular",
           "fontSize": 16,
           "lineHeight": 24,
         },
-        Array [
-          Object {},
-          Object {
+        [
+          {},
+          {
             "color": "red",
             "marginBottom": 10,
           },
@@ -92,7 +92,7 @@ exports[`UI: ExtendedTextInput should match snapshot 2`] = `
   </Text>
   <View
     style={
-      Object {
+      {
         "borderBottomWidth": 1,
         "flexDirection": "row",
       }
@@ -102,16 +102,16 @@ exports[`UI: ExtendedTextInput should match snapshot 2`] = `
       onChangeText={[Function]}
       secureTextEntry={true}
       style={
-        Array [
-          Array [
-            Object {
+        [
+          [
+            {
               "borderBottomWidth": 1,
             },
-            Object {
+            {
               "backgroundColor": "yellow",
             },
           ],
-          Object {
+          {
             "borderBottomWidth": 0,
             "flex": 1,
           },
@@ -120,6 +120,23 @@ exports[`UI: ExtendedTextInput should match snapshot 2`] = `
       value="test input"
     />
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -131,14 +148,14 @@ exports[`UI: ExtendedTextInput should match snapshot 2`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
     >
       <View
         style={
-          Object {
+          {
             "backgroundColor": "red",
             "height": 15,
             "width": 15,
@@ -149,18 +166,18 @@ exports[`UI: ExtendedTextInput should match snapshot 2`] = `
   </View>
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "#ECECEC",
         },
-        Object {
+        {
           "fontFamily": "SourceSans3-Regular",
           "fontSize": 16,
           "lineHeight": 24,
         },
-        Array [
-          Object {},
-          Object {
+        [
+          {},
+          {
             "color": "red",
             "marginTop": 10,
           },
