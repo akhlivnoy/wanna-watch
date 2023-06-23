@@ -1,6 +1,7 @@
 import { BellAddIcon } from './BellAddIcon';
 import { CalendarIcon } from './CalendarIcon';
 import { ClockIcon } from './ClockIcon';
+import { DownArrowIcon } from './DownArrowIcon';
 import {
   ActionIcon,
   AdventureIcon,
@@ -36,11 +37,13 @@ import { PlusCircleIcon } from './PlusCircleIcon';
 import { SearchIcon } from './SearchIcon';
 import { SeriesIcon } from './SeriesIcon';
 import { StarStrokeIcon } from './StarStrokeIcon';
+import { UpArrowIcon } from './UpArrowIcon';
 
 export const SVG = {
   BellAdd: BellAddIcon,
   Calendar: CalendarIcon,
   Clock: ClockIcon,
+  DownArrow: DownArrowIcon,
   LeftArrow: LeftArrowIcon,
   LogoName: LogoNameIcon,
   LogoWithDescription: LogoWithDescriptionIcon,
@@ -50,6 +53,7 @@ export const SVG = {
   Search: SearchIcon,
   Series: SeriesIcon,
   StarStroke: StarStrokeIcon,
+  UpArrow: UpArrowIcon,
 };
 
 export const SVG_GENRES = {

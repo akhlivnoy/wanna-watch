@@ -8,9 +8,21 @@ import { useAppSelector } from '#hooks';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
 
-import { DetailCard, DetailCardType, Genre, IDetailCard } from './components';
+import { DetailCard, DetailCardType, Genre, IDetailCard, IDropDownItem, SelectSeason } from './components';
 import { styles } from './SeriesDetailsScreen.styles';
 import { SeriesDetailsScreenProps } from './SeriesDetailsScreen.types';
+
+// TODO: remove when logic is added
+const data: IDropDownItem[] = [
+  { label: 'Season 1', value: 1 },
+  { label: 'Season 2', value: 2 },
+  { label: 'Season 3', value: 3 },
+  { label: 'Season 4', value: 4 },
+  { label: 'Season 5', value: 5 },
+  { label: 'Season 6', value: 6 },
+  { label: 'Season 7', value: 7 },
+  { label: 'Season 8', value: 8 },
+];
 
 export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> = ({ navigation }) => {
   const { seriesDetails } = useAppSelector(state => state.tmdb);
@@ -129,10 +141,14 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
 
           <ExtendedText preset="regular12">{seriesDetails?.overview}</ExtendedText>
 
-          <ExtendedButton
-            icon={SVG.PlusCircle}
-            title="To Watch"
-          />
+          <View style={[generalStyles.row, generalStyles.jcSpaceBtw]}>
+            <ExtendedButton
+              icon={SVG.PlusCircle}
+              title="To Watch"
+            />
+
+            <SelectSeason data={data} />
+          </View>
 
           <View style={styles.horizontalSeparator} />
 
