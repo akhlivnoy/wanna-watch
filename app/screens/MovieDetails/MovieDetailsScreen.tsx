@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { useMemo } from 'react';
-import { Image, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { Image, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
 import { ExtendedButton, ExtendedText, MainHeader } from '#components';
@@ -55,69 +55,75 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
         title="Movie details"
         onLeftIconPress={navigation.goBack}
       />
-      <View style={styles.container}>
-        <View style={generalStyles.row}>
-          {
-            // ? Poster
-            movieDetails?.poster_path ? (
-              <Image
-                source={{ uri: apiInstance.tmdb.getImageUri(movieDetails.poster_path) }}
-                style={styles.poster}
-              />
-            ) : (
-              <View style={styles.noImage}>
-                <SVG.NoImage
-                  height={100}
-                  width={100}
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={generalStyles.row}>
+            {
+              // ? Poster
+              movieDetails?.poster_path ? (
+                <Image
+                  source={{ uri: apiInstance.tmdb.getImageUri(movieDetails.poster_path) }}
+                  style={styles.poster}
                 />
-              </View>
-            )
-          }
+              ) : (
+                <View style={styles.noImage}>
+                  <SVG.NoImage
+                    height={100}
+                    width={100}
+                  />
+                </View>
+              )
+            }
 
-          <View style={generalStyles.flex}>
-            {/* //? Detail cards */}
-            <View style={styles.detailCards}>
-              {_.map(detailCards, ({ value, type }) => (
-                <DetailCard
-                  key={type + value}
-                  type={type}
-                  value={value}
-                />
-              ))}
-            </View>
-            {/* //? Genres */}
-            <View style={styles.genres}>
-              {movieDetails &&
-                _.map(movieDetails.genres, genre => (
-                  <Genre
-                    key={genre.name}
-                    name={genre.name}
+            <View style={generalStyles.flex}>
+              {/* //? Detail cards */}
+              <View style={styles.detailCards}>
+                {_.map(detailCards, ({ value, type }) => (
+                  <DetailCard
+                    key={type + value}
+                    type={type}
+                    value={value}
                   />
                 ))}
+              </View>
+              {/* //? Genres */}
+              <View style={styles.genres}>
+                {movieDetails &&
+                  _.map(movieDetails.genres, genre => (
+                    <Genre
+                      key={genre.name}
+                      name={genre.name}
+                    />
+                  ))}
+              </View>
             </View>
           </View>
-        </View>
 
-        {/* //? Title */}
-        <ExtendedText preset="semibold24">{movieDetails?.title}</ExtendedText>
+          {/* //? Title */}
+          <ExtendedText preset="semibold24">{movieDetails?.title}</ExtendedText>
 
-        {/* //? Status */}
-        <View style={[generalStyles.row, generalStyles.jcSpaceBtw]}>
-          <View style={styles.statusContainer}>
-            <SVG.Calendar />
-            <ExtendedText preset="regular14">{movieDetails?.release_date}</ExtendedText>
-            <View style={styles.verticalSeparator} />
-            <ExtendedText preset="regular14">{movieDetails?.status}</ExtendedText>
+          {/* //? Status */}
+          <View style={[generalStyles.row, generalStyles.jcSpaceBtw]}>
+            <View style={styles.statusContainer}>
+              <SVG.Calendar />
+              <ExtendedText preset="regular14">{movieDetails?.release_date}</ExtendedText>
+              <View style={styles.verticalSeparator} />
+              <ExtendedText preset="regular14">{movieDetails?.status}</ExtendedText>
+            </View>
+            {subscribeIcon}
           </View>
-          {subscribeIcon}
-        </View>
 
-        <ExtendedButton
-          icon={SVG.PlusCircle}
-          title="To Watch"
-        />
-        <View style={styles.horizontalSeparator} />
-      </View>
+          <ExtendedButton
+            icon={SVG.PlusCircle}
+            title="To Watch"
+          />
+
+          <View style={styles.horizontalSeparator} />
+
+          <ExtendedText preset="medium20">Overview</ExtendedText>
+          <ExtendedText preset="regular12">{movieDetails?.overview}</ExtendedText>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
