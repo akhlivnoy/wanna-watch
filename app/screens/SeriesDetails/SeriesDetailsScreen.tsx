@@ -9,12 +9,22 @@ import { ICredit } from '#models';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
 
-import { ActorCard, DetailCard, DetailCardType, Genre, IDetailCard, IDropDownItem, SelectSeason } from './components';
+import {
+  ActorCard,
+  DetailCard,
+  DetailCardType,
+  Episode,
+  Genre,
+  IDetailCard,
+  IDropDownItem,
+  SelectSeason,
+} from './components';
 import { styles } from './SeriesDetailsScreen.styles';
 import { SeriesDetailsScreenProps } from './SeriesDetailsScreen.types';
 
 export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> = ({ navigation }) => {
   const [dropDownData, setDropDownData] = useState<IDropDownItem[]>([]);
+  const [activeEpisodeIndex, setActiveEpisodeIndex] = useState(-1);
 
   const { seriesDetails, seriesSeasonDetails } = useAppSelector(state => state.tmdb);
 
@@ -63,7 +73,7 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
     );
   }, [seriesDetails?.seasons]);
 
-  const renderItem = ({ item }: { item: ICredit }) => {
+  const renderActorItem = ({ item }: { item: ICredit }) => {
     const [characterName, character] = item.character.split(' / ');
     return (
       <ActorCard
@@ -82,7 +92,7 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
         title="Movie details"
         onLeftIconPress={navigation.goBack}
       />
-      <ScrollView>
+      <ScrollView nestedScrollEnabled>
         <View style={styles.container}>
           <View style={generalStyles.row}>
             {
@@ -161,8 +171,25 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
             horizontal
             contentContainerStyle={styles.actors}
             data={seriesSeasonDetails?.credits.cast}
-            renderItem={renderItem}
+            renderItem={renderActorItem}
           />
+
+          {/* //? Episodes */}
+          <ExtendedText preset="medium20">Episodes</ExtendedText>
+
+          <View style={styles.episodes}>
+            {_.map(seriesSeasonDetails?.episodes, (episode, index) => (
+              <Episode
+                activeIndex={activeEpisodeIndex}
+                index={index}
+                key={episode.id}
+                name={episode.name}
+                overview={episode.overview}
+                runtime={episode.runtime}
+                setActiveIndex={setActiveEpisodeIndex}
+              />
+            ))}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

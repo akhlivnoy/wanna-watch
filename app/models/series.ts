@@ -97,7 +97,7 @@ interface INetwork {
   origin_country: string;
 }
 
-interface IEpisode {
+export interface IEpisode {
   id: number;
   name: string;
   overview: string;

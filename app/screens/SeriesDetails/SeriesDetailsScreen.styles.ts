@@ -12,6 +12,7 @@ interface ISeriesDetailsScreenStyles {
   verticalSeparator: ViewStyle;
   horizontalSeparator: ViewStyle;
   actors: ViewStyle;
+  episodes: ViewStyle;
 }
 
 export const styles = StyleSheet.create<ISeriesDetailsScreenStyles>({
@@ -62,5 +63,8 @@ export const styles = StyleSheet.create<ISeriesDetailsScreenStyles>({
   },
   actors: {
     columnGap: 16,
+  },
+  episodes: {
+    rowGap: 8,
   },
 });
