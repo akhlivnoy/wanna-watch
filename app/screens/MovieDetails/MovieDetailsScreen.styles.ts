@@ -9,7 +9,8 @@ interface IMovieDetailsScreenStyles {
   detailCards: ViewStyle;
   genres: ViewStyle;
   statusContainer: ViewStyle;
-  statusSeparator: ViewStyle;
+  verticalSeparator: ViewStyle;
+  horizontalSeparator: ViewStyle;
 }
 
 export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
@@ -50,8 +51,12 @@ export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
     flexDirection: 'row',
     gap: 8,
   },
-  statusSeparator: {
+  verticalSeparator: {
     width: 2,
+    backgroundColor: COLORS.PRIMARY[300],
+  },
+  horizontalSeparator: {
+    height: 2,
     backgroundColor: COLORS.PRIMARY[300],
   },
 });

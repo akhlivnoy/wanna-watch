@@ -32,6 +32,7 @@ import { LogoNameIcon } from './LogoNameIcon';
 import { LogoWithDescriptionIcon } from './LogoWithDescriptionIcon';
 import { MoviesIcon } from './MoviesIcon';
 import { NoImageIcon } from './NoImageIcon';
+import { PlusCircleIcon } from './PlusCircleIcon';
 import { SearchIcon } from './SearchIcon';
 import { SeriesIcon } from './SeriesIcon';
 import { StarStrokeIcon } from './StarStrokeIcon';
@@ -45,6 +46,7 @@ export const SVG = {
   LogoWithDescription: LogoWithDescriptionIcon,
   Movies: MoviesIcon,
   NoImage: NoImageIcon,
+  PlusCircle: PlusCircleIcon,
   Search: SearchIcon,
   Series: SeriesIcon,
   StarStroke: StarStrokeIcon,

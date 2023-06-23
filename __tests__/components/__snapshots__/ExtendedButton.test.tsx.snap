@@ -31,9 +31,15 @@ exports[`UI: ExtendedButton should match snapshot 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
-      "backgroundColor": undefined,
+      "alignSelf": "flex-start",
+      "backgroundColor": "#FFD700",
+      "borderRadius": 8,
+      "flexDirection": "row",
+      "gap": 8,
       "opacity": 1,
-      "padding": 16,
+      "paddingLeft": 8,
+      "paddingRight": 16,
+      "paddingVertical": 8,
     }
   }
 >
@@ -43,10 +49,14 @@ exports[`UI: ExtendedButton should match snapshot 1`] = `
         {
           "color": "#ECECEC",
         },
-        undefined,
+        {
+          "fontFamily": "SourceSans3-Regular",
+          "fontSize": 16,
+          "lineHeight": 24,
+        },
         [
           {
-            "color": undefined,
+            "color": "#000000",
           },
           undefined,
         ],

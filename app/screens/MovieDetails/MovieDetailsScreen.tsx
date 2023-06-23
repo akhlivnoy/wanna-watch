@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { Image, SafeAreaView, TouchableOpacity, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
-import { ExtendedText, MainHeader } from '#components';
+import { ExtendedButton, ExtendedText, MainHeader } from '#components';
 import { useAppSelector } from '#hooks';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
@@ -106,11 +106,17 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
           <View style={styles.statusContainer}>
             <SVG.Calendar />
             <ExtendedText preset="regular14">{movieDetails?.release_date}</ExtendedText>
-            <View style={styles.statusSeparator} />
+            <View style={styles.verticalSeparator} />
             <ExtendedText preset="regular14">{movieDetails?.status}</ExtendedText>
           </View>
           {subscribeIcon}
         </View>
+
+        <ExtendedButton
+          icon={SVG.PlusCircle}
+          title="To Watch"
+        />
+        <View style={styles.horizontalSeparator} />
       </View>
     </SafeAreaView>
   );
