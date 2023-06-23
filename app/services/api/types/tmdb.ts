@@ -1,15 +1,19 @@
 import { ApiResponse } from 'apisauce';
 
-import { IGenre, IMovie, IMovieDetails, ISeries, ISeriesDetails } from '#models';
+import { IMovie, IMovieDetails, IMovieGenre, ISeries, ISeriesDetails, ISeriesGenre } from '#models';
 import { ErrorResponse } from '#types/api';
 
 // Get genres
 
-export type ApiGetGenresSuccessResponse = {
-  genres: IGenre[];
+export type ApiGetMovieGenresSuccessResponse = {
+  genres: IMovieGenre[];
+};
+export type ApiGetSeriesGenresSuccessResponse = {
+  genres: ISeriesGenre[];
 };
 
-export type ApiGetGenresResponse = ApiResponse<ApiGetGenresSuccessResponse, ErrorResponse>;
+export type ApiGetMovieGenresResponse = ApiResponse<ApiGetMovieGenresSuccessResponse, ErrorResponse>;
+export type ApiGetSeriesGenresResponse = ApiResponse<ApiGetSeriesGenresSuccessResponse, ErrorResponse>;
 
 // Get movies
 

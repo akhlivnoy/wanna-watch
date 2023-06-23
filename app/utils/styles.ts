@@ -19,6 +19,7 @@ type GeneralStyles = {
 
   darkPrimaryColor: TextStyle;
   accentColor: TextStyle;
+  textCenter: TextStyle;
 };
 
 export const generalStyles = StyleSheet.create<GeneralStyles>({
@@ -61,5 +62,8 @@ export const generalStyles = StyleSheet.create<GeneralStyles>({
   },
   accentColor: {
     color: COLORS.ACCENT[300],
+  },
+  textCenter: {
+    textAlign: 'center',
   },
 });

@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { isUndefined } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { RootStackRouteNames } from '#navigation';
+import { HomeStackRouteNames, RootStackRouteNames } from '#navigation';
 import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
 import {
@@ -108,6 +108,7 @@ function* getMovieDetailsWorker({ payload }: PayloadAction<number>) {
   if (!isUndefined(response.data)) {
     if (response.ok) {
       yield put(tmdbSlice.actions.getMovieDetailsSuccess(response.data));
+      StaticNavigator.navigateTo(HomeStackRouteNames.MovieDetails);
     } else {
       yield put(tmdbSlice.actions.getMovieDetailsError(response.data.status_message));
     }

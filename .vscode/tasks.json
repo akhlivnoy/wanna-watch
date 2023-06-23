@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "GitHub",
+      "icon": {
+        "id": "github",
+        "color": "terminal.ansiGreen"
+      },
+      "type": "shell",
+      "command": "clear && zsh",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" }
+    },
+    {
+      "label": "server",
+      "icon": {
+        "id": "server-process",
+        "color": "terminal.ansiMagenta"
+      },
+      "type": "shell",
+      "command": "yarn start && zsh",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}

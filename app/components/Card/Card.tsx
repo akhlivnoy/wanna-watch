@@ -10,9 +10,6 @@ import { generalStyles } from '#utils/styles';
 import { styles } from './Card.styles';
 import { ICardProps } from './Card.types';
 
-const StarStrokeIcon = SVG.StarStroke;
-const NoImageIcon = SVG.NoImage;
-
 const CardComponent: React.ComponentType<ICardProps> = ({ posterUri, title, genres, date, rating, style, ...rest }) => (
   <TouchableOpacity
     style={[styles.container, style]}
@@ -26,7 +23,7 @@ const CardComponent: React.ComponentType<ICardProps> = ({ posterUri, title, genr
       />
     ) : (
       <View style={styles.noImage}>
-        <NoImageIcon
+        <SVG.NoImage
           height={40}
           width={40}
         />
@@ -70,7 +67,7 @@ const CardComponent: React.ComponentType<ICardProps> = ({ posterUri, title, genr
             {rating.toFixed(1)} / 10
           </ExtendedText>
 
-          <StarStrokeIcon
+          <SVG.StarStroke
             color={COLORS.ACCENT[300]}
             height={20}
             width={20}

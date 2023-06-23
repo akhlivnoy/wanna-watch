@@ -15,8 +15,12 @@ export const InitialScreen: React.ComponentType<InitialScreenProps> = () => {
     dispatch(tmdbSlice.actions.getGenres());
     dispatch(tmdbSlice.actions.clearTopRatedMovies());
     dispatch(tmdbSlice.actions.clearTopRatedSeries());
+
     dispatch(tmdbSlice.actions.clearSearchMovie());
     dispatch(tmdbSlice.actions.clearSearchSeries());
+
+    dispatch(tmdbSlice.actions.clearMovieDetails());
+    dispatch(tmdbSlice.actions.clearSeriesDetails());
   });
 
   return (
