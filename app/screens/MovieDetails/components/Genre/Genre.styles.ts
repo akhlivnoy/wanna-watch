@@ -6,6 +6,8 @@ interface IGenreStyles {
 
 export const styles = StyleSheet.create<IGenreStyles>({
   container: {
-    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   },
 });

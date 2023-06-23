@@ -7,6 +7,7 @@ interface IMovieDetailsScreenStyles {
   poster: ImageStyle;
   noImage: ViewStyle;
   detailCards: ViewStyle;
+  genres: ViewStyle;
 }
 
 export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
@@ -37,5 +38,9 @@ export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
   detailCards: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  genres: {
+    gap: 16,
   },
 });

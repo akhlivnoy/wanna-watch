@@ -8,15 +8,15 @@ import { useAppSelector } from '#hooks';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
 
-import { DetailCard, DetailCardType, IDetailCard } from './components';
+import { DetailCard, DetailCardType, Genre, IDetailCard } from './components';
 import { styles } from './MovieDetailsScreen.styles';
 import { MovieDetailsScreenProps } from './MovieDetailsScreen.types';
 
 export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = ({ navigation }) => {
   const { movieDetails } = useAppSelector(state => state.tmdb);
 
-  const detailCards = useMemo(
-    (): ReadonlyArray<IDetailCard> =>
+  const detailCards: ReadonlyArray<IDetailCard> = useMemo(
+    () =>
       movieDetails
         ? [
             {
@@ -73,7 +73,8 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
                 />
               ))}
             </View>
-            {/* <View style={generalStyles.flex}>
+            {/* //? Genres */}
+            <View style={styles.genres}>
               {movieDetails &&
                 _.map(movieDetails.genres, genre => (
                   <Genre
@@ -81,7 +82,7 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
                     name={genre.name}
                   />
                 ))}
-            </View> */}
+            </View>
           </View>
         </View>
       </View>
