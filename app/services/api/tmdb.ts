@@ -5,8 +5,9 @@ import { ErrorResponse } from '#types/api';
 import CONFIG from '../../config/env';
 import { apiClient } from '.';
 import {
-  ApiGetGenresSuccessResponse,
+  ApiGetMovieGenresSuccessResponse,
   ApiGetMoviesSuccessResponse,
+  ApiGetSeriesGenresSuccessResponse,
   ApiGetSeriesSuccessResponse,
   ApiGetTopRatedBody,
   ApiSearchBody,
@@ -14,9 +15,9 @@ import {
 
 const getImageUri = (imageKey: string) => CONFIG.SECURE_BASE_URL + imageKey;
 
-const getMovieGenres = () => apiClient.get<ApiGetGenresSuccessResponse, ErrorResponse>('genre/movie/list');
+const getMovieGenres = () => apiClient.get<ApiGetMovieGenresSuccessResponse, ErrorResponse>('genre/movie/list');
 
-const getSeriesGenres = () => apiClient.get<ApiGetGenresSuccessResponse, ErrorResponse>('genre/tv/list');
+const getSeriesGenres = () => apiClient.get<ApiGetSeriesGenresSuccessResponse, ErrorResponse>('genre/tv/list');
 
 const getTopRatedMovies = (body: ApiGetTopRatedBody) =>
   apiClient.get<ApiGetMoviesSuccessResponse, ErrorResponse>('movie/top_rated', body);

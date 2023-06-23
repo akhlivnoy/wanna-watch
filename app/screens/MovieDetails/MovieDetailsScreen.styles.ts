@@ -11,6 +11,7 @@ interface IMovieDetailsScreenStyles {
   statusContainer: ViewStyle;
   verticalSeparator: ViewStyle;
   horizontalSeparator: ViewStyle;
+  actors: ViewStyle;
 }
 
 export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
@@ -58,5 +59,8 @@ export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
   horizontalSeparator: {
     height: 2,
     backgroundColor: COLORS.PRIMARY[300],
+  },
+  actors: {
+    columnGap: 16,
   },
 });

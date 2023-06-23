@@ -28,7 +28,7 @@ export interface ICredit {
   popularity: number;
   profile_path: null | string;
   cast_id?: number;
-  character?: string;
+  character: string;
   credit_id: string;
   order?: number;
   department?: Department;
