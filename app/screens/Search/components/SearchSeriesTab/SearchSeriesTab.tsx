@@ -20,12 +20,6 @@ const SearchSeriesTabComponent: React.ComponentType<ISearchSeriesTabProps> = ({ 
 
     const onPress = () => {
       dispatch(tmdbSlice.actions.getSeriesDetails(item.id));
-      dispatch(
-        tmdbSlice.actions.getSeriesSeasonDetails({
-          seriesId: item.id,
-          seasonNumber: 1,
-        }),
-      );
     };
 
     return (

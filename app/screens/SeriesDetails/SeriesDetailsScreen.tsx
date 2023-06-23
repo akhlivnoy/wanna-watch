@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Image, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
@@ -12,19 +12,9 @@ import { DetailCard, DetailCardType, Genre, IDetailCard, IDropDownItem, SelectSe
 import { styles } from './SeriesDetailsScreen.styles';
 import { SeriesDetailsScreenProps } from './SeriesDetailsScreen.types';
 
-// TODO: remove when logic is added
-const data: IDropDownItem[] = [
-  { label: 'Season 1', value: 1 },
-  { label: 'Season 2', value: 2 },
-  { label: 'Season 3', value: 3 },
-  { label: 'Season 4', value: 4 },
-  { label: 'Season 5', value: 5 },
-  { label: 'Season 6', value: 6 },
-  { label: 'Season 7', value: 7 },
-  { label: 'Season 8', value: 8 },
-];
-
 export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> = ({ navigation }) => {
+  const [dropDownData, setDropDownData] = useState<IDropDownItem[]>([]);
+
   const { seriesDetails } = useAppSelector(state => state.tmdb);
 
   const detailCards: ReadonlyArray<IDetailCard> = useMemo(
@@ -59,6 +49,18 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
 
     return null;
   }, [seriesDetails?.status]);
+
+  useEffect(() => {
+    setDropDownData(
+      _.map(
+        seriesDetails?.seasons,
+        (season): IDropDownItem => ({
+          label: season.name,
+          value: season.season_number,
+        }),
+      ),
+    );
+  }, [seriesDetails?.seasons]);
 
   // const renderItem = ({ item }: { item: ICredit }) => {
   //  const [characterName, character] = item.character.split(' / ');
@@ -147,7 +149,7 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
               title="To Watch"
             />
 
-            <SelectSeason data={data} />
+            <SelectSeason data={dropDownData} />
           </View>
 
           <View style={styles.horizontalSeparator} />
