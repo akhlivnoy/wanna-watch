@@ -6,10 +6,11 @@ import { HomeStackRouteNames, RootStackRouteNames } from '#navigation';
 import { tmdbSlice } from '#redux/slices';
 import { apiInstance } from '#services/api';
 import {
-  ApiGetGenresResponse,
   ApiGetMovieDetailsResponse,
+  ApiGetMovieGenresResponse,
   ApiGetMoviesResponse,
   ApiGetSeriesDetailsResponse,
+  ApiGetSeriesGenresResponse,
   ApiGetSeriesResponse,
   ApiGetTopRatedBody,
   ApiSearchBody,
@@ -17,8 +18,8 @@ import {
 import { StaticNavigator } from '#services/navigator';
 
 function* getGenresWorker() {
-  const movieResponse: ApiGetGenresResponse = yield call(apiInstance.tmdb.getMovieGenres);
-  const seriesResponse: ApiGetGenresResponse = yield call(apiInstance.tmdb.getSeriesGenres);
+  const movieResponse: ApiGetMovieGenresResponse = yield call(apiInstance.tmdb.getMovieGenres);
+  const seriesResponse: ApiGetSeriesGenresResponse = yield call(apiInstance.tmdb.getSeriesGenres);
 
   if (!isUndefined(movieResponse.data) && !isUndefined(seriesResponse.data)) {
     if (movieResponse.ok && seriesResponse.ok) {
@@ -121,6 +122,7 @@ function* getSeriesDetailsWorker({ payload }: PayloadAction<number>) {
   if (!isUndefined(response.data)) {
     if (response.ok) {
       yield put(tmdbSlice.actions.getSeriesDetailsSuccess(response.data));
+      StaticNavigator.navigateTo(HomeStackRouteNames.SeriesDetails);
     } else {
       yield put(tmdbSlice.actions.getSeriesDetailsError(response.data.status_message));
     }

@@ -54,6 +54,7 @@ export const SVG = {
 
 export const SVG_GENRES = {
   Action: ActionIcon,
+  ActionAdventure: ActionIcon,
   Adventure: AdventureIcon,
   Animation: AnimationIcon,
   Comedy: ComedyIcon,
@@ -71,10 +72,12 @@ export const SVG_GENRES = {
   Reality: RealityIcon,
   Romance: RomanceIcon,
   ScienceFiction: ScienceFictionIcon,
+  SciFiFantasy: ScienceFictionIcon,
   Soap: SoapIcon,
   Talk: TalkIcon,
   Thriller: ThrillerIcon,
   TvMovie: TvMovieIcon,
   War: WarIcon,
+  WarPolitics: WarIcon,
   Western: WesternIcon,
 };
