@@ -1,5 +1,6 @@
 import { Nullable } from '#types/nullable';
 
+import { ICredits } from './credits';
 import { ISeriesGenre } from './genre';
 
 export interface ISeries {
@@ -67,6 +68,18 @@ export interface ISeriesDetails {
   type: string;
   vote_average: number;
   vote_count: number;
+}
+
+export interface ISeriesSeasonDetails {
+  _id: string;
+  air_date: string;
+  episodes: IEpisode[];
+  name: string;
+  overview: string;
+  id: number;
+  poster_path: string;
+  season_number: number;
+  credits: ICredits;
 }
 
 interface ICreatedBy {

@@ -12,6 +12,8 @@ import {
   ApiGetSeriesDetailsResponse,
   ApiGetSeriesGenresResponse,
   ApiGetSeriesResponse,
+  ApiGetSeriesSeasonDetailsBody,
+  ApiGetSeriesSeasonDetailsResponse,
   ApiGetTopRatedBody,
   ApiSearchBody,
 } from '#services/api/types';
@@ -43,10 +45,7 @@ function* getGenresWorker() {
   }
 }
 
-function* getTopRatedMoviesWorker({ payload: { page } }: PayloadAction<ApiGetTopRatedBody>) {
-  const body: ApiGetTopRatedBody = {
-    page,
-  };
+function* getTopRatedMoviesWorker({ payload: body }: PayloadAction<ApiGetTopRatedBody>) {
   const response: ApiGetMoviesResponse = yield call(apiInstance.tmdb.getTopRatedMovies, body);
   if (!isUndefined(response.data)) {
     if (response.ok) {
@@ -57,10 +56,7 @@ function* getTopRatedMoviesWorker({ payload: { page } }: PayloadAction<ApiGetTop
   }
 }
 
-function* getTopRatedSeriesWorker({ payload: { page } }: PayloadAction<ApiGetTopRatedBody>) {
-  const body: ApiGetTopRatedBody = {
-    page,
-  };
+function* getTopRatedSeriesWorker({ payload: body }: PayloadAction<ApiGetTopRatedBody>) {
   const response: ApiGetSeriesResponse = yield call(apiInstance.tmdb.getTopRatedSeries, body);
   if (!isUndefined(response.data)) {
     if (response.ok) {
@@ -71,11 +67,7 @@ function* getTopRatedSeriesWorker({ payload: { page } }: PayloadAction<ApiGetTop
   }
 }
 
-function* searchMovieWorker({ payload: { page, query } }: PayloadAction<ApiSearchBody>) {
-  const body: ApiSearchBody = {
-    page,
-    query,
-  };
+function* searchMovieWorker({ payload: body }: PayloadAction<ApiSearchBody>) {
   const response: ApiGetMoviesResponse = yield call(apiInstance.tmdb.searchMovie, body);
 
   if (!isUndefined(response.data)) {
@@ -87,11 +79,7 @@ function* searchMovieWorker({ payload: { page, query } }: PayloadAction<ApiSearc
   }
 }
 
-function* searchSeriesWorker({ payload: { page, query } }: PayloadAction<ApiSearchBody>) {
-  const body: ApiSearchBody = {
-    page,
-    query,
-  };
+function* searchSeriesWorker({ payload: body }: PayloadAction<ApiSearchBody>) {
   const response: ApiGetSeriesResponse = yield call(apiInstance.tmdb.searchSeries, body);
 
   if (!isUndefined(response.data)) {
@@ -116,8 +104,8 @@ function* getMovieDetailsWorker({ payload }: PayloadAction<number>) {
   }
 }
 
-function* getSeriesDetailsWorker({ payload }: PayloadAction<number>) {
-  const response: ApiGetSeriesDetailsResponse = yield call(apiInstance.tmdb.getSeriesDetails, payload);
+function* getSeriesDetailsWorker({ payload: seriesId }: PayloadAction<number>) {
+  const response: ApiGetSeriesDetailsResponse = yield call(apiInstance.tmdb.getSeriesDetails, seriesId);
 
   if (!isUndefined(response.data)) {
     if (response.ok) {
@@ -125,6 +113,18 @@ function* getSeriesDetailsWorker({ payload }: PayloadAction<number>) {
       StaticNavigator.navigateTo(HomeStackRouteNames.SeriesDetails);
     } else {
       yield put(tmdbSlice.actions.getSeriesDetailsError(response.data.status_message));
+    }
+  }
+}
+
+function* getSeriesSeasonDetailsWorker({ payload: body }: PayloadAction<ApiGetSeriesSeasonDetailsBody>) {
+  const response: ApiGetSeriesSeasonDetailsResponse = yield call(apiInstance.tmdb.getSeriesSeasonDetails, body);
+
+  if (!isUndefined(response.data)) {
+    if (response.ok) {
+      yield put(tmdbSlice.actions.getSeriesSeasonDetailsSuccess(response.data));
+    } else {
+      yield put(tmdbSlice.actions.getSeriesSeasonDetailsError(response.data.status_message));
     }
   }
 }
@@ -142,4 +142,5 @@ export function* tmdbSaga() {
 
   yield takeLatest(tmdbSlice.actions.getMovieDetails, getMovieDetailsWorker);
   yield takeLatest(tmdbSlice.actions.getSeriesDetails, getSeriesDetailsWorker);
+  yield takeLatest(tmdbSlice.actions.getSeriesSeasonDetails, getSeriesSeasonDetailsWorker);
 }

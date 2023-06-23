@@ -1,4 +1,4 @@
-import { IMovieDetails, ISeriesDetails } from '#models';
+import { IMovieDetails, ISeriesDetails, ISeriesSeasonDetails } from '#models';
 import { ErrorResponse } from '#types/api';
 
 // eslint-disable-next-line restrict-imports/restrict-imports
@@ -8,6 +8,7 @@ import {
   ApiGetMovieGenresSuccessResponse,
   ApiGetMoviesSuccessResponse,
   ApiGetSeriesGenresSuccessResponse,
+  ApiGetSeriesSeasonDetailsBody,
   ApiGetSeriesSuccessResponse,
   ApiGetTopRatedBody,
   ApiSearchBody,
@@ -38,6 +39,11 @@ const getMovieDetails = (movieId: number) =>
 
 const getSeriesDetails = (seriesId: number) => apiClient.get<ISeriesDetails, ErrorResponse>(`tv/${seriesId}`);
 
+const getSeriesSeasonDetails = ({ seasonNumber, seriesId }: ApiGetSeriesSeasonDetailsBody) =>
+  apiClient.get<ISeriesSeasonDetails, ErrorResponse>(`tv/${seriesId}/season/${seasonNumber}`, {
+    append_to_response: 'credits',
+  });
+
 export const tmdbApi = {
   getImageUri,
   getMovieGenres,
@@ -48,4 +54,5 @@ export const tmdbApi = {
   searchSeries,
   getMovieDetails,
   getSeriesDetails,
+  getSeriesSeasonDetails,
 };
