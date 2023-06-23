@@ -1,21 +1,22 @@
 import _ from 'lodash';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Image, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
 import { ExtendedButton, ExtendedText, MainHeader } from '#components';
 import { useAppSelector } from '#hooks';
+import { ICredit } from '#models';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
 
-import { DetailCard, DetailCardType, Genre, IDetailCard, IDropDownItem, SelectSeason } from './components';
+import { ActorCard, DetailCard, DetailCardType, Genre, IDetailCard, IDropDownItem, SelectSeason } from './components';
 import { styles } from './SeriesDetailsScreen.styles';
 import { SeriesDetailsScreenProps } from './SeriesDetailsScreen.types';
 
 export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> = ({ navigation }) => {
   const [dropDownData, setDropDownData] = useState<IDropDownItem[]>([]);
 
-  const { seriesDetails } = useAppSelector(state => state.tmdb);
+  const { seriesDetails, seriesSeasonDetails } = useAppSelector(state => state.tmdb);
 
   const detailCards: ReadonlyArray<IDetailCard> = useMemo(
     () =>
@@ -62,17 +63,17 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
     );
   }, [seriesDetails?.seasons]);
 
-  // const renderItem = ({ item }: { item: ICredit }) => {
-  //  const [characterName, character] = item.character.split(' / ');
-  //  return (
-  //    <ActorCard
-  //      character={character}
-  //      characterName={characterName}
-  //      name={item.name}
-  //      profilePath={item.profile_path}
-  //    />
-  //  );
-  // };
+  const renderItem = ({ item }: { item: ICredit }) => {
+    const [characterName, character] = item.character.split(' / ');
+    return (
+      <ActorCard
+        character={character}
+        characterName={characterName}
+        name={item.name}
+        profilePath={item.profile_path}
+      />
+    );
+  };
 
   return (
     <SafeAreaView style={generalStyles.blackFlex}>
@@ -155,13 +156,13 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
           <View style={styles.horizontalSeparator} />
 
           {/* //? Actors */}
-          {/* <ExtendedText preset="medium20">Actors</ExtendedText>
+          <ExtendedText preset="medium20">Actors</ExtendedText>
           <FlatList
             horizontal
             contentContainerStyle={styles.actors}
-            data={seriesDetails?.credits?.cast}
+            data={seriesSeasonDetails?.credits.cast}
             renderItem={renderItem}
-          /> */}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

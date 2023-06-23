@@ -33,14 +33,14 @@ export const ActorCard: React.ComponentType<IActorCardProps> = ({ character, cha
         numberOfLines={1}
         preset="medium12"
       >
-        {character}
+        {character ?? characterName}
       </ExtendedText>
       <ExtendedText
         ellipsizeMode="clip"
         numberOfLines={1}
         preset="regular10"
       >
-        {characterName}
+        {character ? characterName : ''}
       </ExtendedText>
       <View style={styles.separator} />
       <ExtendedText
