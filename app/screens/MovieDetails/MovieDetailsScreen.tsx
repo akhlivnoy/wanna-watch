@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { useMemo } from 'react';
-import { Image, SafeAreaView, View } from 'react-native';
+import { Image, SafeAreaView, TouchableOpacity, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
-import { MainHeader } from '#components';
+import { ExtendedText, MainHeader } from '#components';
 import { useAppSelector } from '#hooks';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
@@ -35,6 +35,18 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
         : [],
     [movieDetails],
   );
+
+  const subscribeIcon = useMemo(() => {
+    if (movieDetails?.status !== 'Canceled' && movieDetails?.status !== 'Released') {
+      return (
+        <TouchableOpacity>
+          <SVG.BellAdd />
+        </TouchableOpacity>
+      );
+    }
+
+    return null;
+  }, [movieDetails?.status]);
 
   return (
     <SafeAreaView style={generalStyles.blackFlex}>
@@ -84,6 +96,20 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
                 ))}
             </View>
           </View>
+        </View>
+
+        {/* //? Title */}
+        <ExtendedText preset="semibold24">{movieDetails?.title}</ExtendedText>
+
+        {/* //? Status */}
+        <View style={[generalStyles.row, generalStyles.jcSpaceBtw]}>
+          <View style={styles.statusContainer}>
+            <SVG.Calendar />
+            <ExtendedText preset="regular14">{movieDetails?.release_date}</ExtendedText>
+            <View style={styles.statusSeparator} />
+            <ExtendedText preset="regular14">{movieDetails?.status}</ExtendedText>
+          </View>
+          {subscribeIcon}
         </View>
       </View>
     </SafeAreaView>

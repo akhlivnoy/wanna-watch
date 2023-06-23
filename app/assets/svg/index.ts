@@ -1,3 +1,5 @@
+import { BellAddIcon } from './BellAddIcon';
+import { CalendarIcon } from './CalendarIcon';
 import { ClockIcon } from './ClockIcon';
 import {
   ActionIcon,
@@ -35,6 +37,8 @@ import { SeriesIcon } from './SeriesIcon';
 import { StarStrokeIcon } from './StarStrokeIcon';
 
 export const SVG = {
+  BellAdd: BellAddIcon,
+  Calendar: CalendarIcon,
   Clock: ClockIcon,
   LeftArrow: LeftArrowIcon,
   LogoName: LogoNameIcon,

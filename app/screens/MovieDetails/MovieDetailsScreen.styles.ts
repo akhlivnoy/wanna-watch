@@ -8,13 +8,16 @@ interface IMovieDetailsScreenStyles {
   noImage: ViewStyle;
   detailCards: ViewStyle;
   genres: ViewStyle;
+  statusContainer: ViewStyle;
+  statusSeparator: ViewStyle;
 }
 
 export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
   container: {
     flex: 1,
-    paddingTop: 16,
+    paddingVertical: 16,
     paddingHorizontal: 16,
+    rowGap: 16,
 
     backgroundColor: COLORS.PRIMARY[500],
   },
@@ -42,5 +45,13 @@ export const styles = StyleSheet.create<IMovieDetailsScreenStyles>({
   },
   genres: {
     gap: 16,
+  },
+  statusContainer: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  statusSeparator: {
+    width: 2,
+    backgroundColor: COLORS.PRIMARY[300],
   },
 });
