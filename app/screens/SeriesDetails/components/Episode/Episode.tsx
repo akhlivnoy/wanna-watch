@@ -50,7 +50,7 @@ export const Episode: React.ComponentType<IEpisodeProps> = ({
           preset="medium16"
           style={generalStyles.flex}
         >
-          {name}
+          {index + 1}. {name}
         </ExtendedText>
       </TouchableOpacity>
 

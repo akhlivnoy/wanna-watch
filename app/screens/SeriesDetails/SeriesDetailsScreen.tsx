@@ -4,7 +4,7 @@ import { FlatList, Image, SafeAreaView, ScrollView, TouchableOpacity, View } fro
 
 import { SVG } from '#assets/svg';
 import { ExtendedButton, ExtendedText, MainHeader } from '#components';
-import { useAppSelector } from '#hooks';
+import { useAppSelector, useSpecificKeyExtractor } from '#hooks';
 import { ICredit } from '#models';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
@@ -171,6 +171,7 @@ export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> 
             horizontal
             contentContainerStyle={styles.actors}
             data={seriesSeasonDetails?.credits.cast}
+            keyExtractor={useSpecificKeyExtractor<ICredit>('actor', 'id')}
             renderItem={renderActorItem}
           />
 
