@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
 import { DEFAULT_STACK_OPTIONS } from '#constants';
-import { MovieDetailsScreen, MovieListsScreen, SearchScreen, SeriesListsScreen } from '#screens';
+import { MovieDetailsScreen, MovieListsScreen, SearchScreen, SeriesDetailsScreen, SeriesListsScreen } from '#screens';
 
 import { HomeStackParamList, HomeStackRouteNames } from './HomeStackNavigator.types';
 
@@ -25,6 +25,10 @@ export const HomeStackNavigator = () => (
     <Stack.Screen
       component={MovieDetailsScreen}
       name={HomeStackRouteNames.MovieDetails}
+    />
+    <Stack.Screen
+      component={SeriesDetailsScreen}
+      name={HomeStackRouteNames.SeriesDetails}
     />
   </Stack.Navigator>
 );

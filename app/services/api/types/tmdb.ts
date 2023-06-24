@@ -1,6 +1,14 @@
 import { ApiResponse } from 'apisauce';
 
-import { IMovie, IMovieDetails, IMovieGenre, ISeries, ISeriesDetails, ISeriesGenre } from '#models';
+import {
+  IMovie,
+  IMovieDetails,
+  IMovieGenre,
+  ISeries,
+  ISeriesDetails,
+  ISeriesGenre,
+  ISeriesSeasonDetails,
+} from '#models';
 import { ErrorResponse } from '#types/api';
 
 // Get genres
@@ -42,6 +50,13 @@ export type ApiGetSeriesSuccessResponse = {
 export type ApiGetSeriesResponse = ApiResponse<ApiGetSeriesSuccessResponse, ErrorResponse>;
 
 export type ApiGetSeriesDetailsResponse = ApiResponse<ISeriesDetails, ErrorResponse>;
+
+export type ApiGetSeriesSeasonDetailsBody = {
+  seriesId: number;
+  seasonNumber: number;
+};
+
+export type ApiGetSeriesSeasonDetailsResponse = ApiResponse<ISeriesSeasonDetails, ErrorResponse>;
 
 // Search
 

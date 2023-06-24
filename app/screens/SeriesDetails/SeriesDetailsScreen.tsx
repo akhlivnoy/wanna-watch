@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FlatList, Image, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 
 import { SVG } from '#assets/svg';
@@ -9,36 +9,48 @@ import { ICredit } from '#models';
 import { apiInstance } from '#services/api';
 import { generalStyles } from '#utils/styles';
 
-import { ActorCard, DetailCard, DetailCardType, Genre, IDetailCard } from './components';
-import { styles } from './MovieDetailsScreen.styles';
-import { MovieDetailsScreenProps } from './MovieDetailsScreen.types';
+import {
+  ActorCard,
+  DetailCard,
+  DetailCardType,
+  Episode,
+  Genre,
+  IDetailCard,
+  IDropDownItem,
+  SelectSeason,
+} from './components';
+import { styles } from './SeriesDetailsScreen.styles';
+import { SeriesDetailsScreenProps } from './SeriesDetailsScreen.types';
 
-export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = ({ navigation }) => {
-  const { movieDetails } = useAppSelector(state => state.tmdb);
+export const SeriesDetailsScreen: React.ComponentType<SeriesDetailsScreenProps> = ({ navigation }) => {
+  const [dropDownData, setDropDownData] = useState<IDropDownItem[]>([]);
+  const [activeEpisodeIndex, setActiveEpisodeIndex] = useState(-1);
+
+  const { seriesDetails, seriesSeasonDetails } = useAppSelector(state => state.tmdb);
 
   const detailCards: ReadonlyArray<IDetailCard> = useMemo(
     () =>
-      movieDetails
+      seriesDetails
         ? [
             {
-              value: movieDetails.runtime,
-              type: DetailCardType.RunTime,
+              value: seriesDetails.number_of_seasons,
+              type: DetailCardType.Seasons,
             },
             {
-              value: movieDetails.vote_average,
+              value: seriesDetails.vote_average,
               type: DetailCardType.Rating,
             },
             {
-              value: movieDetails.production_countries[0].iso_3166_1,
+              value: seriesDetails.production_countries[0].iso_3166_1,
               type: DetailCardType.Country,
             },
           ]
         : [],
-    [movieDetails],
+    [seriesDetails],
   );
 
   const subscribeIcon = useMemo(() => {
-    if (movieDetails?.status !== 'Canceled' && movieDetails?.status !== 'Released') {
+    if (seriesDetails?.status !== 'Canceled' && seriesDetails?.status !== 'Ended') {
       return (
         <TouchableOpacity>
           <SVG.BellAdd />
@@ -47,9 +59,21 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
     }
 
     return null;
-  }, [movieDetails?.status]);
+  }, [seriesDetails?.status]);
 
-  const renderItem = ({ item }: { item: ICredit }) => {
+  useEffect(() => {
+    setDropDownData(
+      _.map(
+        seriesDetails?.seasons,
+        (season): IDropDownItem => ({
+          label: season.name,
+          value: season.season_number,
+        }),
+      ),
+    );
+  }, [seriesDetails?.seasons]);
+
+  const renderActorItem = ({ item }: { item: ICredit }) => {
     const [characterName, character] = item.character.split(' / ');
     return (
       <ActorCard
@@ -68,14 +92,14 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
         title="Movie details"
         onLeftIconPress={navigation.goBack}
       />
-      <ScrollView>
+      <ScrollView nestedScrollEnabled>
         <View style={styles.container}>
           <View style={generalStyles.row}>
             {
               // ? Poster
-              movieDetails?.poster_path ? (
+              seriesDetails?.poster_path ? (
                 <Image
-                  source={{ uri: apiInstance.tmdb.getImageUri(movieDetails.poster_path) }}
+                  source={{ uri: apiInstance.tmdb.getImageUri(seriesDetails.poster_path) }}
                   style={styles.poster}
                 />
               ) : (
@@ -101,8 +125,8 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
               </View>
               {/* //? Genres */}
               <View style={styles.genres}>
-                {movieDetails &&
-                  _.map(movieDetails.genres, genre => (
+                {seriesDetails &&
+                  _.map(seriesDetails.genres, genre => (
                     <Genre
                       key={genre.name}
                       name={genre.name}
@@ -113,38 +137,60 @@ export const MovieDetailsScreen: React.ComponentType<MovieDetailsScreenProps> = 
           </View>
 
           {/* //? Title */}
-          <ExtendedText preset="semibold24">{movieDetails?.title}</ExtendedText>
+          <ExtendedText preset="semibold24">{seriesDetails?.name}</ExtendedText>
 
           {/* //? Status */}
           <View style={[generalStyles.row, generalStyles.jcSpaceBtw]}>
             <View style={styles.statusContainer}>
               <SVG.Calendar />
-              <ExtendedText preset="regular14">{movieDetails?.release_date}</ExtendedText>
+              <ExtendedText preset="regular14">
+                {seriesDetails?.first_air_date} — {seriesDetails?.last_air_date}
+              </ExtendedText>
               <View style={styles.verticalSeparator} />
-              <ExtendedText preset="regular14">{movieDetails?.status}</ExtendedText>
+              <ExtendedText preset="regular14">{seriesDetails?.status}</ExtendedText>
             </View>
             {subscribeIcon}
           </View>
 
-          <ExtendedButton
-            icon={SVG.PlusCircle}
-            title="To Watch"
-          />
+          <ExtendedText preset="regular12">{seriesDetails?.overview}</ExtendedText>
+
+          <View style={[generalStyles.row, generalStyles.jcSpaceBtw]}>
+            <ExtendedButton
+              icon={SVG.PlusCircle}
+              title="To Watch"
+            />
+
+            <SelectSeason data={dropDownData} />
+          </View>
 
           <View style={styles.horizontalSeparator} />
-
-          <ExtendedText preset="medium20">Overview</ExtendedText>
-          <ExtendedText preset="regular12">{movieDetails?.overview}</ExtendedText>
 
           {/* //? Actors */}
           <ExtendedText preset="medium20">Actors</ExtendedText>
           <FlatList
             horizontal
             contentContainerStyle={styles.actors}
-            data={movieDetails?.credits?.cast}
+            data={seriesSeasonDetails?.credits.cast}
             keyExtractor={useSpecificKeyExtractor<ICredit>('actor', 'id')}
-            renderItem={renderItem}
+            renderItem={renderActorItem}
           />
+
+          {/* //? Episodes */}
+          <ExtendedText preset="medium20">Episodes</ExtendedText>
+
+          <View style={styles.episodes}>
+            {_.map(seriesSeasonDetails?.episodes, (episode, index) => (
+              <Episode
+                activeIndex={activeEpisodeIndex}
+                index={index}
+                key={episode.id}
+                name={episode.name}
+                overview={episode.overview}
+                runtime={episode.runtime}
+                setActiveIndex={setActiveEpisodeIndex}
+              />
+            ))}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,10 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
-import { IMovie, IMovieDetails, IMovieGenre, ISeries, ISeriesDetails, ISeriesGenre } from '#models';
+import {
+  IMovie,
+  IMovieDetails,
+  IMovieGenre,
+  ISeries,
+  ISeriesDetails,
+  ISeriesGenre,
+  ISeriesSeasonDetails,
+} from '#models';
 import { GetGenresSuccessAction } from '#redux/types';
 import {
   ApiGetMoviesSuccessResponse,
+  ApiGetSeriesSeasonDetailsBody,
   ApiGetSeriesSuccessResponse,
   ApiGetTopRatedBody,
   ApiSearchBody,
@@ -40,6 +49,7 @@ interface ITmdbState {
   };
   movieDetails: Nullable<IMovieDetails>;
   seriesDetails: Nullable<ISeriesDetails>;
+  seriesSeasonDetails: Nullable<ISeriesSeasonDetails>;
 }
 
 const INITIAL_STATE: ITmdbState = {
@@ -71,6 +81,7 @@ const INITIAL_STATE: ITmdbState = {
   },
   movieDetails: null,
   seriesDetails: null,
+  seriesSeasonDetails: null,
 };
 
 export const tmdbSlice = createSlice({
@@ -174,6 +185,16 @@ export const tmdbSlice = createSlice({
     getSeriesDetailsError(state, action: PayloadAction<string>) {},
     clearSeriesDetails(state) {
       state.seriesDetails = null;
+    },
+
+    //* Series season details
+    getSeriesSeasonDetails(state, action: PayloadAction<ApiGetSeriesSeasonDetailsBody>) {},
+    getSeriesSeasonDetailsSuccess(state, { payload }: PayloadAction<ISeriesSeasonDetails>) {
+      state.seriesSeasonDetails = payload;
+    },
+    getSeriesSeasonDetailsError(state, action: PayloadAction<string>) {},
+    clearSeriesSeasonDetails(state) {
+      state.seriesSeasonDetails = null;
     },
   },
 });
